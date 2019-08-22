@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>設定</string>
+		</dict>
+		<dict>
+			<key>defaults</key>
+			<string>tw.hiraku.optimizedzhuyin</string>
+			<key>PostNotification</key>
+			<string>tw.hiraku.optimizedzhuyin/updated</string>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>key</key>
+			<string>layout</string>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>label</key>
+			<string>注音排列模式</string>
+			<key>validTitles</key>
+			<array>
+				<string>原廠</string>
+				<string>緊密</string>
+				<string>電腦</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>label</key>
+			<string>授權狀態</string>
+			<key>footerText</key>
+			<string>歡迎到粉絲頁按個讚表示支持與鼓勵</string>
+		</dict>
+		<dict>
+			<key>alignment</key>
+			<integer>2</integer>
+			<key>get</key>
+			<string>version</string>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>相關連結</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>© 2011-2018 皮樂 Hiraku</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>forumURL:</string>
+			<key>label</key>
+			<string>iPhone4.TW 論壇討論串</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>facebookURL:</string>
+			<key>label</key>
+			<string>Facebook 粉絲專頁</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>blogURL:</string>
+			<key>label</key>
+			<string>Hiraku Dev（個人網站）</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>優化注音</string>
+</dict>
+</plist>

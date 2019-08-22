@@ -1,0 +1,10 @@
+{
+	entry = {
+		bundle = OptimizedZhuyin;
+		cell = PSLinkCell;
+		detail = "OptimizedZhuyinListController";
+		icon = "Icon.png";
+		isController = 1;
+		label = "Optimized Zhuyin";
+	};
+}
