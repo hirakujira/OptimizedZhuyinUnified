@@ -1,10 +1,10 @@
 TWEAK_NAME = OptimizedZhuyin
-OptimizedZhuyin_OBJCC_FILES = Tweak.xm
+OptimizedZhuyin_FILES = Tweak.xm KBDumper.mm
 OptimizedZhuyin_CFLAGS = -F$(SYSROOT)/System/Library/CoreServices -fobjc-arc
 OptimizedZhuyin_PRIVATE_FRAMEWORKS = UIKit Foundation
 
 SYSROOT = $(THEOS)/sdks/iPhoneOS9.2.sdk
-TARGET = :clang::6.0
+TARGET = iphone:latest:6.0
 ARCHS = armv7 arm64 arm64e
 
 OptimizedZhuyin_LDFLAGS += -Wl,-segalign,4000

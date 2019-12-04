@@ -3,7 +3,7 @@ Priority: optional
 Section: Keyboards
 Maintainer: Hiraku <dev@hiraku.tw>
 Architecture: iphoneos-arm
-Version: 1.4
+Version: 2.0
 Replaces: com.hiraku.optimizedzhuyin, com.hiraku.optimizedzhuyin6, com.hiraku.optimizedzhuyin7, com.hiraku.optimizedzhuyin8
 Provides: com.hiraku.optimizedzhuyin, com.hiraku.optimizedzhuyin6, com.hiraku.optimizedzhuyin7, com.hiraku.optimizedzhuyin8
 Description: 優化注音 iOS6~13

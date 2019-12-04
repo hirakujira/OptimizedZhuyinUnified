@@ -1,5 +1,5 @@
 TWEAK_NAME = OptimizedZhuyin
-OptimizedZhuyin_OBJCC_FILES = ../Tweak.xm
+OptimizedZhuyin_FILES = ../Tweak.xm ../KBDumper.mm
 OptimizedZhuyin_CFLAGS = -F$(SYSROOT)/System/Library/CoreServices -fobjc-arc
 OptimizedZhuyin_PRIVATE_FRAMEWORKS = UIKit Foundation
 
