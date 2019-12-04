@@ -828,13 +828,13 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 %ctor {
     %init;
 
-    if (kCFCoreFoundationVersionNumber > kCFCoreFoundationVersionNumber_iOS_10_0) {
+    if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10_0) {
         dumper = [[KBDumper alloc] init];
     }
 
     NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
     if ([identifier isEqualToString:@"com.apple.springboard"]) {
-        if (kCFCoreFoundationVersionNumber > kCFCoreFoundationVersionNumber_iOS_10_0) {
+        if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10_0) {
             NSLog(@"OptimizedZhuyin: Verifying keyboard info");
             if (![dumper verify]) {
                 NSLog(@"OptimizedZhuyin: Verify failed. Regenerating info");
