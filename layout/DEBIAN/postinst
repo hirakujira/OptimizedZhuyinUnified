@@ -1,6 +1,10 @@
 #!/bin/sh
 if [[ $1 == install || update ]]; then
 
+echo "Cleaning keyboard cache..."
+cd /var/mobile/Library/Caches
+rm -Rf ./com.apple.keyboards/
+
 declare -a cydia
     cydia=($CYDIA)
     if [[ ${CYDIA+@} ]]; then
