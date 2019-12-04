@@ -76,9 +76,9 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
 -(NSMutableArray *)subtrees 
 {
     NSMutableArray *subtree = %orig;
-    // if ([self.name containsString:@"Delete"])
-     // if([subtree count] > 5 && [self.name containsString:@"List"])
-     //     NSLog(@"NSUInteger: %d BigTree is %@",[subtree count] ,self.name);
+    // if (([self.name containsString:@"Delete"] || [subtree count] > 5) && [self.name containsString:@"List"])
+    // if([subtree count] > 5 && [self.name containsString:@"List"])
+        // NSLog(@"NSUInteger: %d BigTree is %@",[subtree count] ,self.name);
      
     if([self.name isEqualToString:@"Zhuyin-Letters-Keyset_Row4"]) 
     {
@@ -122,13 +122,15 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
 //iPhone 6 Plus
     if([self.name isEqualToString:@"902195268_414x226_iPhone-PortraitTruffle-Eleven-on-Eleven-Geometry-List"] ||
         [self.name isEqualToString:@"9481733950471963205_414x226_iPhone-PortraitTruffle-Eleven-on-Eleven-Geometry-List"] || //Row1 iOS11
-        [self.name isEqualToString:@"32561_414x226_iPhone-PortraitTruffle-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS12
+        [self.name isEqualToString:@"32561_414x226_iPhone-PortraitTruffle-Eleven-on-Eleven-Geometry-List"] || //Row1 iOS12
+        [self.name isEqualToString:@"44072_414x226_iPhone-PortraitTruffle-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS13
     { 
         setShape(subtree,0,10,37.4,2,6,36,41);
     }
     else if([self.name isEqualToString:@"2483559833_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
             [self.name isEqualToString:@"11071898421845702287_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row 2 iOS11
-            [self.name isEqualToString:@"32562_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS12
+            [self.name isEqualToString:@"32562_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS12
+            [self.name isEqualToString:@"44073_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS13
     {
         if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
         {
@@ -138,7 +140,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"1465172223_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
             [self.name isEqualToString:@"12042969042044382224_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS11
-            [self.name isEqualToString:@"32563_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS12
+            [self.name isEqualToString:@"32563_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS12
+            [self.name isEqualToString:@"44074_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS13
     {
         if (isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -156,7 +159,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"1075436866_414x226_iPhone-PortraitTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             [self.name isEqualToString:@"4768091962294745147_414x226_iPhone-PortraitTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS11
-            [self.name isEqualToString:@"32564_414x226_iPhone-PortraitTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS12
+            [self.name isEqualToString:@"32564_414x226_iPhone-PortraitTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS12
+            [self.name isEqualToString:@"44075_414x226_iPhone-PortraitTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS13
      {
         if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
         {
@@ -169,7 +173,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"1380690174_414x226_iPhone-PortraitTruffle-Eleven-Delete-Geometry-List"] ||
             [self.name isEqualToString:@"18108164670186703632_414x226_iPhone-PortraitTruffle-Eleven-Delete-Geometry-List"] || //Delete iOS11
-            [self.name isEqualToString:@"32566_414x226_iPhone-PortraitTruffle-Eleven-Delete-Geometry-List"]) //Delete iOS12
+            [self.name isEqualToString:@"32566_414x226_iPhone-PortraitTruffle-Eleven-Delete-Geometry-List"] || //Delete iOS12
+            [self.name isEqualToString:@"44077_414x226_iPhone-PortraitTruffle-Eleven-Delete-Geometry-List"]) //Delete iOS13
     {
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -186,7 +191,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
 //iPhone 6 
     else if([self.name isEqualToString:@"2638737428_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
             [self.name isEqualToString:@"17369512942790770385_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS11
-            [self.name isEqualToString:@"32540_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS12
+            [self.name isEqualToString:@"32540_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS12
+            [self.name isEqualToString:@"44051_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS13
     {
         if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
         {
@@ -195,7 +201,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"2532305676_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
             [self.name isEqualToString:@"17389980008693904166_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS11
-            [self.name isEqualToString:@"32541_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS12
+            [self.name isEqualToString:@"32541_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS12
+            [self.name isEqualToString:@"44052_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -214,7 +221,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"3531140261_375x216_iPhone-PortraitChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             [self.name isEqualToString:@"8993031374934393214_375x216_iPhone-PortraitChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS11
-            [self.name isEqualToString:@"32542_375x216_iPhone-PortraitChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS12
+            [self.name isEqualToString:@"32542_375x216_iPhone-PortraitChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS12
+            [self.name isEqualToString:@"44053_375x216_iPhone-PortraitChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutComputer)
         {
@@ -227,7 +235,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if ([self.name isEqualToString:@"3892020103_375x216_iPhone-PortraitChoco-Eleven-Delete-Geometry-List"] ||
             [self.name isEqualToString:@"10597753664089504054_375x216_iPhone-PortraitChoco-Eleven-Delete-Geometry-List"] || //Delete iOS11
-            [self.name isEqualToString:@"32544_375x216_iPhone-PortraitChoco-Eleven-Delete-Geometry-List"]) //Delete iOS12
+            [self.name isEqualToString:@"32544_375x216_iPhone-PortraitChoco-Eleven-Delete-Geometry-List"] || //Delete iOS12
+            [self.name isEqualToString:@"44055_375x216_iPhone-PortraitChoco-Eleven-Delete-Geometry-List"]) //Delete iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -243,20 +252,22 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
 //==============================================================================
 //iPhone 5
 
-    else if([self.name isEqualToString:@"2657651457_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-1-Geometry-List"] ||             //Row2 iOS 6、7
-            [self.name isEqualToString:@"3630645507_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||             //Row2 iOS8~10
+    else if([self.name isEqualToString:@"2657651457_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-1-Geometry-List"] || //Row2 iOS 6、7
+            [self.name isEqualToString:@"3630645507_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS8~10
             [self.name isEqualToString:@"5557568356688324154_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS11
-            [self.name isEqualToString:@"32475_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"])                    //Row2 iOS12
+            [self.name isEqualToString:@"32475_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS12
+            [self.name isEqualToString:@"43986_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row3 iOS13
     { 
         if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
         {
             setShape(subtree,0,9,29,1,47,28,39);
         }
     }
-    else if([self.name isEqualToString:@"2936508161_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"] ||                 //Row 3 iOS 6、7
-            [self.name isEqualToString:@"1667699450_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||             //Row3 iOS8~10
-            [self.name isEqualToString:@"4517550650555612083_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||     //Row3 iOS11
-            [self.name isEqualToString:@"32476_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"])                    //Row3 iOS12
+    else if([self.name isEqualToString:@"2936508161_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"] || //Row 3 iOS 6、7
+            [self.name isEqualToString:@"1667699450_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS8~10
+            [self.name isEqualToString:@"4517550650555612083_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS11
+            [self.name isEqualToString:@"32476_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS12
+            [self.name isEqualToString:@"43987_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress)
         {
@@ -273,10 +284,11 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
             setShape(subtree,0,9,29,15,89,28,39);
         }
     }
-    else if([self.name isEqualToString:@"2029842703_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||             //Row 4 iOS 6、7
-            [self.name isEqualToString:@"1749525777_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||             //Row4 iOS8~10
-            [self.name isEqualToString:@"1548831744048594415_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||  //Row4 iOS11
-            [self.name isEqualToString:@"32477_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"])                    //Row4 iOS12
+    else if([self.name isEqualToString:@"2029842703_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row 4 iOS 6、7
+            [self.name isEqualToString:@"1749525777_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS8~10
+            [self.name isEqualToString:@"1548831744048594415_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS11
+            [self.name isEqualToString:@"32477_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS12
+            [self.name isEqualToString:@"43988_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
         {
@@ -288,10 +300,11 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
         }
     }
 
-    else if([self.name isEqualToString:@"728623610_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] ||             //Delete iOS 6、7
-            [self.name isEqualToString:@"3748539132_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] ||             //Delete iOS8~10
-            [self.name isEqualToString:@"18375181497296690375_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] ||     //Delete iOS11
-            [self.name isEqualToString:@"32479_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"])                    //Delete iOS12
+    else if([self.name isEqualToString:@"728623610_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] || //Delete iOS 6、7
+            [self.name isEqualToString:@"3748539132_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] || //Delete iOS8~10
+            [self.name isEqualToString:@"18375181497296690375_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] || //Delete iOS11
+            [self.name isEqualToString:@"32479_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] ||//Delete iOS12
+            [self.name isEqualToString:@"43990_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"]) //Delete iOS13
     {
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -308,18 +321,21 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
 //橫向注音位置表
 //==============================================================================
 //iPhone XS Max, iPhone XS, iPhone XR, iPhone SE
-    else if ([self.name isEqualToString:@"32496_568x162_iPhone-Proportional-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS12
+    else if ([self.name isEqualToString:@"32496_568x162_iPhone-Proportional-Eleven-on-Eleven-Geometry-List"] || //Row1 iOS12
+            [self.name isEqualToString:@"44007_568x162_iPhone-Proportional-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS13
     {
 
     }
-    else if ([self.name isEqualToString:@"32497_568x162_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS12
+    else if ([self.name isEqualToString:@"32497_568x162_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS12
+            [self.name isEqualToString:@"44008_568x162_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS13
     {
         if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
         {
             setShape(subtree,0,9,51.6,1,37,50.5,29);
         }
     }
-    else if ([self.name isEqualToString:@"32498_568x162_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS12
+    else if ([self.name isEqualToString:@"32498_568x162_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS12
+            [self.name isEqualToString:@"44009_568x162_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS13
     {
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -337,7 +353,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
             setShape(subtree,0,9,51.6,26,68,50.5,29);
         }
     }
-    else if ([self.name isEqualToString:@"32499_568x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row3 iOS12
+    else if ([self.name isEqualToString:@"32499_568x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS12
+            [self.name isEqualToString:@"44010_568x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS13
     {
         if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
         {
@@ -348,7 +365,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
             [(UIKBTree *)subtree[10] setFrame:CGRectMake(0,100,50.5,29)];
         }
     }
-    else if ([self.name isEqualToString:@"32501_568x162_iPhone-Proportional-Eleven-Delete-Geometry-List"]) //Delete iOS12
+    else if ([self.name isEqualToString:@"32501_568x162_iPhone-Proportional-Eleven-Delete-Geometry-List"] || //Delete iOS12
+            [self.name isEqualToString:@"44012_568x162_iPhone-Proportional-Eleven-Delete-Geometry-List"]) //Delete iOS13
     {
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -364,7 +382,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
 //iPhone 6 Plus
     else if([self.name isEqualToString:@"3282091293_736x162_iPhone-LandscapeTruffle-Eleven-on-Eleven-Geometry-List"] ||
             [self.name isEqualToString:@"17950672344707254440_736x162_iPhone-LandscapeTruffle-Eleven-on-Eleven-Geometry-List"] || //Row1 iOS11
-            [self.name isEqualToString:@"32607_736x162_iPhone-LandscapeTruffle-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS12
+            [self.name isEqualToString:@"32607_736x162_iPhone-LandscapeTruffle-Eleven-on-Eleven-Geometry-List"] || //Row1 iOS12
+            [self.name isEqualToString:@"44118_736x162_iPhone-LandscapeTruffle-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS13
     { 
         if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
         {
@@ -377,7 +396,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"1778981362_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
             [self.name isEqualToString:@"16530536593749521031_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||  //Row2 iOS11
-            [self.name isEqualToString:@"32608_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS12
+            [self.name isEqualToString:@"32608_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS12
+            [self.name isEqualToString:@"44119_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS13
     {
         if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
         {
@@ -393,7 +413,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"2814370067_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
             [self.name isEqualToString:@"948057038593399820_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS11
-            [self.name isEqualToString:@"32609_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS12
+            [self.name isEqualToString:@"32609_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS12
+            [self.name isEqualToString:@"44120_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -428,7 +449,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"310431278_736x162_iPhone-LandscapeTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             [self.name isEqualToString:@"8070595148251783465_736x162_iPhone-LandscapeTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS11
-            [self.name isEqualToString:@"32610_736x162_iPhone-LandscapeTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS12
+            [self.name isEqualToString:@"32610_736x162_iPhone-LandscapeTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS12
+            [self.name isEqualToString:@"44121_736x162_iPhone-LandscapeTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS13
      { 
         if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
         {
@@ -450,7 +472,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"3810702877_736x162_iPhone-LandscapeTruffle-Eleven-Delete-Geometry-List"] ||
             [self.name isEqualToString:@"15572770678521019785_736x162_iPhone-LandscapeTruffle-Eleven-Delete-Geometry-List"] || //Delete iOS11
-            [self.name isEqualToString:@"32612_736x162_iPhone-LandscapeTruffle-Eleven-Delete-Geometry-List"]) //Delete iOS12
+            [self.name isEqualToString:@"32612_736x162_iPhone-LandscapeTruffle-Eleven-Delete-Geometry-List"] || //Delete iOS12
+            [self.name isEqualToString:@"44123_736x162_iPhone-LandscapeTruffle-Eleven-Delete-Geometry-List"]) //Delete iOS13
     {
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -482,12 +505,14 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
 //iPhone 6
     else if([self.name isEqualToString:@"151987975_667x162_iPhone-LandscapeChoco-Eleven-on-Eleven-Geometry-List"] ||
             [self.name isEqualToString:@"15669924788214932666_667x162_iPhone-LandscapeChoco-Eleven-on-Eleven-Geometry-List"] || //Row1 iOS11
-            [self.name isEqualToString:@"32583_667x162_iPhone-LandscapeChoco-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS12
+            [self.name isEqualToString:@"32583_667x162_iPhone-LandscapeChoco-Eleven-on-Eleven-Geometry-List"] || //Row1 iOS12
+            [self.name isEqualToString:@"44094_667x162_iPhone-LandscapeChoco-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS13
     { 
     }
     else if([self.name isEqualToString:@"1916434208_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
             [self.name isEqualToString:@"8014139193398579750_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS11
-            [self.name isEqualToString:@"32584_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS12
+            [self.name isEqualToString:@"32584_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS12
+            [self.name isEqualToString:@"44095_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS13
     {
         if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
         {
@@ -496,7 +521,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"1615233310_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
             [self.name isEqualToString:@"2254400432844477614_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS11
-            [self.name isEqualToString:@"32585_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"])//Row3 iOS12 8
+            [self.name isEqualToString:@"32585_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS12
+            [self.name isEqualToString:@"44096_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
@@ -516,7 +542,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if([self.name isEqualToString:@"3913116670_667x162_iPhone-LandscapeChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             [self.name isEqualToString:@"364348373525446959_667x162_iPhone-LandscapeChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS11
-            [self.name isEqualToString:@"32586_667x162_iPhone-LandscapeChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS12
+            [self.name isEqualToString:@"32586_667x162_iPhone-LandscapeChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS12
+            [self.name isEqualToString:@"44097_667x162_iPhone-LandscapeChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
         {
@@ -529,7 +556,8 @@ static void moveKey(UIKBTree *keyRow, float y, float h)
     }
     else if ([self.name isEqualToString:@"2264922919_667x162_iPhone-LandscapeChoco-Eleven-Delete-Geometry-List"] ||
             [self.name isEqualToString:@"1549084266065605525_667x162_iPhone-LandscapeChoco-Eleven-Delete-Geometry-List"] || //Delete iOS11
-            [self.name isEqualToString:@"32588_667x162_iPhone-LandscapeChoco-Eleven-Delete-Geometry-List"]) //Delete iOS12
+            [self.name isEqualToString:@"32588_667x162_iPhone-LandscapeChoco-Eleven-Delete-Geometry-List"] || //Delete iOS12
+            [self.name isEqualToString:@"44099_667x162_iPhone-LandscapeChoco-Eleven-Delete-Geometry-List"]) //Delete iOS13
     { 
         if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
         {
