@@ -3,7 +3,7 @@
 #import "firmware.h"
 
 @implementation KBDumper
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self)

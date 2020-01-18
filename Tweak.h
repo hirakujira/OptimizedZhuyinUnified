@@ -27,7 +27,7 @@
 
 typedef enum {
 	ZhuyinLayoutNative,
-	ZhuyinLayoutCompress,
+	ZhuyinLayoutCompact,
 	ZhuyinLayoutComputer,
 	// ZhuyinLayoutEten,
 } ZhuyinLayout;

@@ -2,12 +2,14 @@
 
 static int respring;
 
-void addRespringButtonCallBack () {
+void addRespringButtonCallBack () 
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AddRespringButton" object:nil];
 }
 
 @implementation OptimizedZhuyinMainController
-- (instancetype)init {
+- (instancetype)init 
+{
     self = [super init];
     CFNotificationCenterRemoveObserver(CFNotificationCenterGetDarwinNotifyCenter(), &respring, CFSTR("tw.hiraku.optimizedzhuyin/updated"), NULL);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AddRespringButton" object:nil];
@@ -18,37 +20,45 @@ void addRespringButtonCallBack () {
     return self;
 }
 
-- (id)specifiers {
-	if(_specifiers == nil) {
+- (id)specifiers 
+{
+	if(_specifiers == nil) 
+    {
 		_specifiers = [self loadSpecifiersFromPlistName:@"OptimizedZhuyin" target:self];
 	}
 	return _specifiers;
 }
 
--(void)facebookURL:(id)param {
-	 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.facebook.com/hiraku.tw"]];
+- (void)openFacebook
+{
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.facebook.com/hiraku.tw"]];
 }
 
--(void)blogURL:(id)param {
-	 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://hiraku.tw/2012/02/2855/"]];
+- (void)openBlog
+{
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://hiraku.tw/2012/02/2855/"]];
 }
 
--(void)forumURL:(id)param {
-	 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://iphone4.tw/forums/showthread.php?t=167707"]];
+- (void)openForum
+{
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://iphone4.tw/forums/showthread.php?t=167707"]];
 }
 
--(NSString *)version {
+- (NSString *)version 
+{
 	return @"認同皮樂即可免費使用";
 }
 
 
-- (id)readPreferenceValue:(PSSpecifier*)specifier {
+- (id)readPreferenceValue:(PSSpecifier *)specifier 
+{
 	NSString *path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
 	NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:path];
 	return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
 }
 
-- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
+- (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier 
+{
 	NSString *path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
 	NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithContentsOfFile:path];
 	[settings setObject:value forKey:specifier.properties[@"key"]];
@@ -59,7 +69,8 @@ void addRespringButtonCallBack () {
 	}
 }
 
-- (void)addRespringButton:(NSNotification *)notification {
+- (void)addRespringButton:(NSNotification *)notification 
+{
     UIAlertView *alert =
     [[UIAlertView alloc] initWithTitle:@"提醒"
                                message:@"要儲存設定，必須重新啟動SpringBoard，您要現在重新啟動SpringBoard嗎？"
@@ -69,8 +80,10 @@ void addRespringButtonCallBack () {
     [alert show];
 }
 
--(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex 
+{
+    switch (buttonIndex) 
+    {
         case 1:
             [self showLoadingView];
             [self performSelector:@selector(respring) withObject:self afterDelay:2.0];
@@ -78,13 +91,15 @@ void addRespringButtonCallBack () {
     }
 }
 
-- (void)respring {
+- (void)respring 
+{
 	system("rm -Rf /User/Library/Caches/com.apple.keyboards/");
     system("/usr/bin/killall lsd SpringBoard");
     system("/usr/bin/killall backboardd");
 }
 
-- (void)showLoadingView {
+- (void)showLoadingView 
+{
     UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
         
     UIView* loading = [[UIView alloc] initWithFrame:CGRectMake(window.frame.size.width/2-50, window.frame.size.height/2-50, 100, 100)];

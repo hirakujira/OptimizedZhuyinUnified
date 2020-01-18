@@ -35,14 +35,14 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 
 %group NSStringHook %hook NSString 
 %new 
--(BOOL)containsString:(NSString *)string 
+- (BOOL)containsString:(NSString *)string 
 {
     return [self rangeOfString:string].location != NSNotFound ? YES : NO;
 }
 %end %end
 
 %hook UIKeyboardLayoutStar
--(void)setKeyboardName:(NSString*)name appearance:(UIKeyboardAppearance)appearance 
+- (void)setKeyboardName:(NSString*)name appearance:(UIKeyboardAppearance)appearance 
 {
     layout = (ZhuyinLayout)[plistDict[@"layout"] intValue];
 
@@ -69,16 +69,21 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 //==============================================================================
 
 %hook UIKBTree
--(NSMutableArray *)subtrees 
+- (NSMutableArray *)subtrees 
 {
     NSMutableArray *subtree = %orig;
+    if (isZhuyin != YES)
+    {
+        return subtree;
+    }
+    
     // if (([self.name containsString:@"Delete"] || [subtree count] > 5) && [self.name containsString:@"List"])
-    // if([subtree count] > 5 && [self.name containsString:@"List"])
+    // if ([subtree count] > 5 && [self.name containsString:@"List"])
         // NSLog(@"NSUInteger: %d BigTree is %@",[subtree count] ,self.name);
      
-    if([self.name isEqualToString:@"Zhuyin-Letters-Keyset_Row4"]) 
+    if ([self.name isEqualToString:@"Zhuyin-Letters-Keyset_Row4"]) 
     {
-        if(layout == ZhuyinLayoutComputer && [subtree count] == 10) 
+        if (layout == ZhuyinLayoutComputer && [subtree count] == 10) 
         {
             NSMutableDictionary* properties = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                 @"，",     @"KBdisplayString",
@@ -90,9 +95,9 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [subtree addObject:commaKey];
         }
     }
-    else if([self.name isEqualToString:@"Zhuyin-Letters-Keyset_Row3"]) 
+    else if ([self.name isEqualToString:@"Zhuyin-Letters-Keyset_Row3"]) 
     {
-        if([subtree count] == 10 && layout == ZhuyinLayoutCompress) 
+        if ([subtree count] == 10 && layout == ZhuyinLayoutCompact) 
         {
             NSMutableDictionary* propertiesComma = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                 @"，",     @"KBdisplayString",
@@ -116,24 +121,22 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 //直向注音位置表 
 //==============================================================================
 //iPhone 6 Plus
-    if([self.name isEqualToString:@"902195268_414x226_iPhone-PortraitTruffle-Eleven-on-Eleven-Geometry-List"] ||
-        isTargetGeometryList(self.name, @"PortraitTruffle", @"Row1-Geometry-List"))
-    { 
-        setShape(subtree,0,10,37.4,2,6,36,41);
+    if (isTargetGeometryList(self.name, @"PortraitTruffle", @"Row1-Geometry-List"))
+    {
     }
-    else if([self.name isEqualToString:@"2483559833_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"2483559833_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
             isTargetGeometryList(self.name, @"PortraitTruffle", @"Row2-Geometry-List"))
     {
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
             setShape(subtree,0,9,37.4,2,51,36,41);
         }
         // return subtree;
     }
-    else if([self.name isEqualToString:@"1465172223_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"1465172223_414x226_iPhone-PortraitTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
             isTargetGeometryList(self.name, @"PortraitTruffle", @"Row3-Geometry-List"))
     {
-        if (isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             copySubtree(subtree,1);
             setShape(subtree,0,9,37.4,2,95,36,41);
@@ -142,15 +145,15 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [(UIKBTree *)subtree[10] setFrame:CGRectMake(375,51,36,41)];
             [(UIKBTree *)subtree[11] setFrame:CGRectMake(375,95,36,41)];
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        else if (layout == ZhuyinLayoutComputer)
         {
             setShape(subtree,0,9,37.4,21,95,35,41);
         }
     }
-    else if([self.name isEqualToString:@"1075436866_414x226_iPhone-PortraitTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"1075436866_414x226_iPhone-PortraitTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             isTargetGeometryList(self.name, @"PortraitTruffle", @"Row4-Geometry-List"))
      {
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        if (layout == ZhuyinLayoutComputer) 
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
 
@@ -159,15 +162,15 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [(UIKBTree *)subtree[10] setFrame:CGRectMake(2,139,36,41)];
         }
     }
-    else if([self.name isEqualToString:@"1380690174_414x226_iPhone-PortraitTruffle-Eleven-Delete-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"1380690174_414x226_iPhone-PortraitTruffle-Eleven-Delete-Geometry-List"] ||
             isTargetGeometryList(self.name, @"PortraitTruffle", @"Delete-Geometry-List"))
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(376,139,36,41)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(375,139,36,41)];
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        else if (layout == ZhuyinLayoutComputer) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(376,51,36,41)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(375,51,36,41)];
@@ -175,18 +178,21 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     }
 //==============================================================================
 //iPhone 6 
-    else if([self.name isEqualToString:@"2638737428_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
+    else if (isTargetGeometryList(self.name, @"PortraitChoco", @"Row1-Geometry-List"))
+    {
+    }
+    else if ([self.name isEqualToString:@"2638737428_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
             isTargetGeometryList(self.name, @"PortraitChoco", @"Row2-Geometry-List"))
     {
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
             setShape(subtree,0,9,34,1,49,32,38);
         }
     }
-    else if([self.name isEqualToString:@"2532305676_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"2532305676_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
             isTargetGeometryList(self.name, @"PortraitChoco", @"Row3-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             copySubtree(subtree,1);
             setShape(subtree,0,9,34,1,91,32,38);
@@ -196,15 +202,15 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [(UIKBTree *)subtree[10] setFrame:CGRectMake(341,49,32,38)];
             [(UIKBTree *)subtree[11] setFrame:CGRectMake(341,91,32,38)];
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        else if (layout == ZhuyinLayoutComputer)
         {
             setShape(subtree,0,9,34,19,91,32,38);
         }
     }
-    else if([self.name isEqualToString:@"3531140261_375x216_iPhone-PortraitChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"3531140261_375x216_iPhone-PortraitChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             isTargetGeometryList(self.name, @"PortraitChoco", @"Row4-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        if (layout == ZhuyinLayoutComputer)
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
 
@@ -216,12 +222,12 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     else if ([self.name isEqualToString:@"3892020103_375x216_iPhone-PortraitChoco-Eleven-Delete-Geometry-List"] ||
             isTargetGeometryList(self.name, @"PortraitChoco", @"Delete-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(341,133,33,38)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(340,133,33,38)];
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        else if (layout == ZhuyinLayoutComputer) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(341,49,33,38)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(340,49,33,38)];
@@ -229,21 +235,23 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     }
 //==============================================================================
 //iPhone 5
-
-    else if([self.name isEqualToString:@"2657651457_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-1-Geometry-List"] || //Row2 iOS 6、7
+    else if (isTargetGeometryList(self.name, @"Portrait", @"Row1-Geometry-List"))
+    {
+    }
+    else if ([self.name isEqualToString:@"2657651457_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-1-Geometry-List"] || //Row2 iOS 6、7
             [self.name isEqualToString:@"3630645507_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"] || //Row2 iOS8~10
             isTargetGeometryList(self.name, @"Portrait", @"Row2-Geometry-List"))
     { 
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
             setShape(subtree,0,9,29,1,47,28,39);
         }
     }
-    else if([self.name isEqualToString:@"2936508161_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"] || //Row 3 iOS 6、7
-            [self.name isEqualToString:@"1667699450_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS8~10
-            isTargetGeometryList(self.name, @"Portrait", @"Row3-Geometry-List"))
+    else if ([self.name isEqualToString:@"2936508161_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"] || //Row 3 iOS 6、7
+             [self.name isEqualToString:@"1667699450_320x216_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"] || //Row3 iOS8~10
+             isTargetGeometryList(self.name, @"Portrait", @"Row3-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress)
+        if (layout == ZhuyinLayoutCompact)
         {
             copySubtree(subtree,1);
             setShape(subtree,0,9,29,1,89,28,39);
@@ -253,16 +261,16 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [(UIKBTree *)subtree[10] setFrame:CGRectMake(291,47,28,39)];
             [(UIKBTree *)subtree[11] setFrame:CGRectMake(291,89,28,39)];
         }
-        else if (isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        else if (layout == ZhuyinLayoutComputer)
         {
             setShape(subtree,0,9,29,15,89,28,39);
         }
     }
-    else if([self.name isEqualToString:@"2029842703_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row 4 iOS 6、7
-            [self.name isEqualToString:@"1749525777_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS8~10
-            isTargetGeometryList(self.name, @"Portrait", @"Row4-Geometry-List"))
+    else if ([self.name isEqualToString:@"2029842703_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row 4 iOS 6、7
+             [self.name isEqualToString:@"1749525777_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row4 iOS8~10
+             isTargetGeometryList(self.name, @"Portrait", @"Row4-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        if (layout == ZhuyinLayoutComputer) 
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
 
@@ -272,16 +280,16 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         }
     }
 
-    else if([self.name isEqualToString:@"728623610_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] || //Delete iOS 6、7
+    else if ([self.name isEqualToString:@"728623610_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] || //Delete iOS 6、7
             [self.name isEqualToString:@"3748539132_320x216_iPhone-Proportional-Eleven-Delete-Geometry-List"] || //Delete iOS8~10
             isTargetGeometryList(self.name, @"Portrait", @"Delete-Geometry-List"))
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(291,131,28,39)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(291,131,28,39)];
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        else if (layout == ZhuyinLayoutComputer) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(291,47,28,39)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(291,47,28,39)];
@@ -293,18 +301,17 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 //iPhone XS Max, iPhone XS, iPhone XR, iPhone SE
     else if (isTargetGeometryList(self.name, @"Caymen", @"Row1-Geometry-List"))
     {
-
     }
     else if (isTargetGeometryList(self.name, @"Caymen", @"Row2-Geometry-List"))
     {
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
             setShape(subtree,0,9,51.6,1,37,50.5,29);
         }
     }
     else if (isTargetGeometryList(self.name, @"Caymen", @"Row3-Geometry-List"))
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
             [subtree addObject: [(UIKBTree *)subtree[1] copy]];
@@ -315,14 +322,14 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [(UIKBTree *)subtree[10] setFrame:CGRectMake(516,37,51.6,29)];
             [(UIKBTree *)subtree[11] setFrame:CGRectMake(516,68,51.6,29)];
         }
-        else if (isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        else if (layout == ZhuyinLayoutComputer)
         {
             setShape(subtree,0,9,51.6,26,68,50.5,29);
         }
     }
     else if (isTargetGeometryList(self.name, @"Caymen", @"Row4-Geometry-List"))
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        if (layout == ZhuyinLayoutComputer) 
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
             
@@ -333,22 +340,22 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     }
     else if (isTargetGeometryList(self.name, @"Caymen", @"Delete-Geometry-List"))
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(517,100,50.5,29)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(516,100,51.6,29)];
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        else if (layout == ZhuyinLayoutComputer) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(517,37,50.5,29)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(516,37,51.6,29)];
         }
     }
 //iPhone 6 Plus
-    else if([self.name isEqualToString:@"3282091293_736x162_iPhone-LandscapeTruffle-Eleven-on-Eleven-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"3282091293_736x162_iPhone-LandscapeTruffle-Eleven-on-Eleven-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeTruffle", @"Row1-Geometry-List"))
     { 
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
             if (iOS11)
             {
@@ -357,10 +364,10 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         }
     
     }
-    else if([self.name isEqualToString:@"1778981362_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"1778981362_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeTruffle", @"Row2-Geometry-List"))
     {
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
             if (iOS11)
             {
@@ -372,10 +379,10 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             }
         }
     }
-    else if([self.name isEqualToString:@"2814370067_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"2814370067_736x162_iPhone-LandscapeTruffle-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeTruffle", @"Row3-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
             [subtree addObject: [(UIKBTree *)subtree[1] copy]];
@@ -397,7 +404,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
                 [(UIKBTree *)subtree[11] setFrame:CGRectMake(584,68,47,29)];
             }
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        else if (layout == ZhuyinLayoutComputer) 
         {
             if (iOS11)
             {
@@ -406,10 +413,10 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         }
 
     }
-    else if([self.name isEqualToString:@"310431278_736x162_iPhone-LandscapeTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"310431278_736x162_iPhone-LandscapeTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeTruffle", @"Row4-Geometry-List"))
      { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        if (layout == ZhuyinLayoutComputer) 
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
 
@@ -427,10 +434,10 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             }
         }
     }
-    else if([self.name isEqualToString:@"3810702877_736x162_iPhone-LandscapeTruffle-Eleven-Delete-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"3810702877_736x162_iPhone-LandscapeTruffle-Eleven-Delete-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeTruffle", @"Delete-Geometry-List"))
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             if (iOS11)
             {
@@ -443,7 +450,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
                 [(UIKBTree *)subtree[0] setFrame:CGRectMake(584,100,47,29)];
             }
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        else if (layout == ZhuyinLayoutComputer) 
         {
             if (iOS11)
             {
@@ -458,22 +465,22 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         }
     }
 //iPhone 6
-    else if([self.name isEqualToString:@"151987975_667x162_iPhone-LandscapeChoco-Eleven-on-Eleven-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"151987975_667x162_iPhone-LandscapeChoco-Eleven-on-Eleven-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeChoco", @"Row1-Geometry-List"))
     { 
     }
-    else if([self.name isEqualToString:@"1916434208_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"1916434208_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Two-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeChoco", @"Row2-Geometry-List"))
     {
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
             setShape(subtree,0,9,48,70,37,47,29);
         }
     }
-    else if([self.name isEqualToString:@"1615233310_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"1615233310_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeChoco", @"Row3-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
             [subtree addObject: [(UIKBTree *)subtree[1] copy]];
@@ -484,15 +491,15 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [(UIKBTree *)subtree[10] setFrame:CGRectMake(549,37,47,29)];
             [(UIKBTree *)subtree[11] setFrame:CGRectMake(549,68,47,29)];
         }
-        else if (isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        else if (layout == ZhuyinLayoutComputer)
         {
             setShape(subtree,0,9,48,89,68,47,29);
         }
     }
-    else if([self.name isEqualToString:@"3913116670_667x162_iPhone-LandscapeChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"3913116670_667x162_iPhone-LandscapeChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeChoco", @"Row4-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        if (layout == ZhuyinLayoutComputer) 
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
             
@@ -504,12 +511,12 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     else if ([self.name isEqualToString:@"2264922919_667x162_iPhone-LandscapeChoco-Eleven-Delete-Geometry-List"] ||
             isTargetGeometryList(self.name, @"LandscapeChoco", @"Delete-Geometry-List"))
     { 
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) 
+        if (layout == ZhuyinLayoutCompact) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(550,100,47,29)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(549,100,47,29)];
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer) 
+        else if (layout == ZhuyinLayoutComputer) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(550,37,47,29)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(549,37,47,29)];
@@ -517,9 +524,9 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     }
     
 //iPhone 4
-    else if([self.name isEqualToString:@"1892494589_480x162_iPhone-Proportional-Five-Row-Ten-on-Ten-1-Geometry-List"]) //Row2 
+    else if ([self.name isEqualToString:@"1892494589_480x162_iPhone-Proportional-Five-Row-Ten-on-Ten-1-Geometry-List"]) //Row2 
     {
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer)) 
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer)) 
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(1,37,42,29)];
             [(UIKBTree *)subtree[1] setPaddedFrame:CGRectMake(44,37,43,29)];
@@ -544,9 +551,9 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [(UIKBTree *)subtree[9] setFrame:CGRectMake(393,37,43,29)];
         }
     }
-    else if([self.name isEqualToString:@"1209170427_480x162_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"]) //Row 3
+    else if ([self.name isEqualToString:@"1209170427_480x162_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"]) //Row 3
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress)
+        if (layout == ZhuyinLayoutCompact)
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(1,68,42,29)];
             [(UIKBTree *)subtree[1] setPaddedFrame:CGRectMake(44,68,43,29)];
@@ -578,9 +585,9 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             [(UIKBTree *)subtree[11] setFrame:CGRectMake(437,68,42,29)];
         }
     }
-    else if([self.name isEqualToString:@"1009229979_480x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row 4
+    else if ([self.name isEqualToString:@"1009229979_480x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row 4
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        if (layout == ZhuyinLayoutComputer)
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
 
@@ -610,14 +617,14 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             //NSLog(@"sub tree %@",subtree[10]);
         }
     }
-    else if([self.name isEqualToString:@"1080426452_480x162_iPhone-Proportional-Eleven-Delete-Geometry-List"])
+    else if ([self.name isEqualToString:@"1080426452_480x162_iPhone-Proportional-Eleven-Delete-Geometry-List"])
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress)
+        if (layout == ZhuyinLayoutCompact)
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(437,100,42,29)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(437,100,42,29)];
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        else if (layout == ZhuyinLayoutComputer)
         {
             [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(437,37,42,29)];
             [(UIKBTree *)subtree[0] setFrame:CGRectMake(437,37,42,29)];
@@ -625,13 +632,13 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     }
 //==============================================================================
 //iPhone 5
-    else if([self.name isEqualToString:@"5025152533619999113_568x162_iPhone-Proportional-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS11
+    else if ([self.name isEqualToString:@"5025152533619999113_568x162_iPhone-Proportional-Eleven-on-Eleven-Geometry-List"]) //Row1 iOS11
     {
     }
-    else if([self.name isEqualToString:@"669203205_568x162_iPhone-Proportional-Five-Row-Ten-on-Ten-1-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"669203205_568x162_iPhone-Proportional-Five-Row-Ten-on-Ten-1-Geometry-List"] ||
             [self.name isEqualToString:@"4803681197627595025_568x162_iPhone-Proportional-Five-Row-Zhuyin-Row-Two-Geometry-List"]) //Row2 iOS11
     {
-        if(isZhuyin == YES && (layout == ZhuyinLayoutCompress || layout == ZhuyinLayoutComputer))
+        if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
             if (iOS11)
             {
@@ -643,10 +650,10 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             }
         }
     }
-    else if([self.name isEqualToString:@"3243476474_568x162_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"3243476474_568x162_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"] ||
             [self.name isEqualToString:@"4438399755679006270_568x162_iPhone-Proportional-Five-Row-Zhuyin-Row-Three-Geometry-List"]) //Row3 iOS11
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress)
+        if (layout == ZhuyinLayoutCompact)
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
             [subtree addObject: [(UIKBTree *)subtree[1] copy]];
@@ -670,7 +677,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
                 [(UIKBTree *)subtree[11] setFrame:CGRectMake(500,68,47,29)];
             }
         }
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        if (layout == ZhuyinLayoutComputer)
         {
             if (iOS11)
             {
@@ -678,10 +685,10 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
             }
         }
     }
-    else if([self.name isEqualToString:@"1730179876_568x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"1730179876_568x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
             [self.name isEqualToString:@"1916203488763040914_568x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row4 iOS11
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutComputer)
+        if (layout == ZhuyinLayoutComputer)
         {
             [subtree addObject: [(UIKBTree *)subtree[0] copy]];
             if (iOS11)
@@ -697,17 +704,17 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
                 [(UIKBTree *)subtree[10] setFrame:CGRectMake(21,100,46,29)];
             }
         }
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) {
+        if (layout == ZhuyinLayoutCompact) {
             if (iOS11)
             {
                 setShape(subtree,0,9,51.5,1,100,50.5,29);
             }
         }
     }
-    else if([self.name isEqualToString:@"3237044538_568x162_iPhone-Proportional-Eleven-Delete-Geometry-List"] ||
+    else if ([self.name isEqualToString:@"3237044538_568x162_iPhone-Proportional-Eleven-Delete-Geometry-List"] ||
             [self.name isEqualToString:@"7457953364702574698_568x162_iPhone-Proportional-Eleven-Delete-Geometry-List"]) //Delete iOS11
     {
-        if(isZhuyin == YES && layout == ZhuyinLayoutCompress) {
+        if (layout == ZhuyinLayoutCompact) {
             if (iOS11)
             {
                 [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(516,100,50.5,29)];
@@ -719,7 +726,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
                 [(UIKBTree *)subtree[0] setFrame:CGRectMake(500,100,47,29)];
             }
         }
-        else if(isZhuyin == YES && layout == ZhuyinLayoutComputer) {
+        else if (layout == ZhuyinLayoutComputer) {
             if (iOS11)
             {
                 [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(516,37,50.5,29)];
@@ -739,7 +746,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 // -(NSMutableDictionary *)properties
 // {
 //     NSMutableDictionary* myproperties = %orig;
-//     if([self.name isEqualToString:@"Chinese-Traditional-Ideographic-Full-Stop"])
+//     if ([self.name isEqualToString:@"Chinese-Traditional-Ideographic-Full-Stop"])
 //     // if ([[self displayString] isEqualToString:@"。"])
 //         NSLog (@"properties is :%@",myproperties);
 
@@ -779,7 +786,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     }
 
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-     if(![fileManager fileExistsAtPath:SETTINGS_PATH]) { 
+     if (![fileManager fileExistsAtPath:SETTINGS_PATH]) { 
          NSMutableDictionary* zhuyinSettings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@1, @"layout",nil];
          [zhuyinSettings writeToFile:SETTINGS_PATH atomically:YES];
      }

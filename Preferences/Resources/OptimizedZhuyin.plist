@@ -62,19 +62,11 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>© 2011-2018 皮樂 Hiraku</string>
+			<string>© 2011-2020 皮樂 Hiraku</string>
 		</dict>
 		<dict>
 			<key>action</key>
-			<string>forumURL:</string>
-			<key>label</key>
-			<string>iPhone4.TW 論壇討論串</string>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-		</dict>
-		<dict>
-			<key>action</key>
-			<string>facebookURL:</string>
+			<string>openFacebook</string>
 			<key>label</key>
 			<string>Facebook 粉絲專頁</string>
 			<key>cell</key>
@@ -82,9 +74,17 @@
 		</dict>
 		<dict>
 			<key>action</key>
-			<string>blogURL:</string>
+			<string>openBlog</string>
 			<key>label</key>
 			<string>Hiraku Dev（個人網站）</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>openForum</string>
+			<key>label</key>
+			<string>iPhone4.TW 論壇討論串</string>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 		</dict>

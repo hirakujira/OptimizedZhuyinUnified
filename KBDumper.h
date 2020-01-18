@@ -1,7 +1,8 @@
 #import <UIKit/UIKit.h>
 #import "UIKBTree.h"
 
-typedef enum {
+typedef enum 
+{
     UIKBTreeNothing = 0,
     UIKBTreeKeyboard = 1,
     UIKBTreeKeyplane = 2,
