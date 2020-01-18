@@ -18,32 +18,16 @@ static inline void copySubtree(id object, int num)
     }
 }
 //============================================================================== 
-static void moveKey(UIKBTree *keyRow, float y, float h) 
+static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardType, NSString* rowName) 
 {
-    float x1, x2;
-    CGRect firstFrame = [((UIKBTree *)keyRow.subtrees[0]) frame];
-    CGRect firstPaddedFrame= [((UIKBTree *)keyRow.subtrees[0]) paddedFrame];
-    float w1 = firstFrame.size.width;
-    float w2 = firstPaddedFrame.size.width;
-
-    for (int i = 0; i < keyRow.subtrees.count ; ++i) 
+    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_10_0) 
     {
-        CGRect keyFrame = [((UIKBTree *)keyRow.subtrees[i]) frame];
-        CGRect keyPaddedFrame = [((UIKBTree *)keyRow.subtrees[i]) paddedFrame];
-        x1 = keyFrame.origin.x;
-        x2 = keyPaddedFrame.origin.x;
-        [((UIKBTree *)keyRow.subtrees[i]) setFrame:CGRectMake(x1,y,w1,h)];
-        [((UIKBTree *)keyRow.subtrees[i]) setPaddedFrame:CGRectMake(x2,y,w2,h)];
-    }
-}
-//============================================================================== 
-static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardType, NSString* rowName) {
-    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_10_0) {
         return NO;
     }
     
     NSString *name = dumper.config[dumper.version][[NSString stringWithFormat:@"iPhone-%@-Zhuyin", keyboardType]][rowName];
-    if (name != nil) {
+    if (name != nil) 
+    {
         return [geomeryListName isEqualToString:name];
     }
     return NO;
@@ -779,7 +763,8 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     //       conceivable that cached files from Safe Mode could later cause
     //       issues.
     Class $UIKeyboardCache = objc_getClass("UIKeyboardCache");
-    if ($UIKeyboardCache != nil) {
+    if ($UIKeyboardCache != nil) 
+    {
         UIKeyboardCache *cache = [%c(UIKeyboardCache) sharedInstance];
         CPBitmapStore *_store = MSHookIvar<id>(cache, "_store");
         // FIXME: Consider using purge method for older firmware as well.
@@ -799,7 +784,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
          [zhuyinSettings writeToFile:SETTINGS_PATH atomically:YES];
      }
 
-    if (showVerifyError == YES)
+    if (showVerifyError == YES) 
     {
         UIAlertController *alert = [UIAlertController 
                                     alertControllerWithTitle:@"OptimizedZhuyin 鍵盤錯誤" 
@@ -819,7 +804,8 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 //==============================================================================
 %group GKeyboardCache %hook UIKeyboardCache
 
-- (void)displayView:(id)view withKey:(id)key fromLayout:(id)layout {
+- (void)displayView:(id)view withKey:(id)key fromLayout:(id)layout 
+{
     [[view layer] _display];
 }
 
@@ -828,34 +814,42 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 %ctor {
     %init;
 
-    if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10_0) {
+    if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10_0) 
+    {
         dumper = [[KBDumper alloc] init];
     }
 
     NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
-    if ([identifier isEqualToString:@"com.apple.springboard"]) {
-        if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10_0) {
+    if ([identifier isEqualToString:@"com.apple.springboard"]) 
+    {
+        if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10_0) 
+        {
             NSLog(@"OptimizedZhuyin: Verifying keyboard info");
-            if (![dumper verify]) {
+            if (![dumper verify]) 
+            {
                 NSLog(@"OptimizedZhuyin: Verify failed. Regenerating info");
                 dlopen("/System/Library/PrivateFrameworks/TextInputUI.framework/TextInputUI", RTLD_LAZY);
                 [dumper parseKeyboardName];
-                if (![dumper verify]) {
+                if (![dumper verify]) 
+                {
                     showVerifyError = YES;
                 }
             } 
-            else {
+            else 
+            {
                 NSLog(@"OptimizedZhuyin: Verifying keyboard OK");
             }
         }
         %init(GSpringBoard);
     }
 
-    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_8_0) {
+    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_8_0) 
+    {
         %init(NSStringHook);
     }
 
     if (objc_getClass("UIKeyboardCache") != nil)
-        // Include additional hooks for iOS 4.2.1+
-        %init(GKeyboardCache);
+    {
+        %init(GKeyboardCache); // Include additional hooks for iOS 4.2.1+
+    }
 }

@@ -12,6 +12,7 @@ GO_EASY_ON_ME = 1
 FINALPACKAGE = 1
 
 SUBPROJECTS += Preferences
+
 include $(THEOS)/makefiles/common.mk
 include $(THEOS_MAKE_PATH)/tweak.mk
 include $(THEOS_MAKE_PATH)/aggregate.mk

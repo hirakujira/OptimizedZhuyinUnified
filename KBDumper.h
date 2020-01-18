@@ -23,7 +23,6 @@ typedef enum {
 - (UIKBTree *)getSubtree:(UIKBTree *)tree withType:(UIKBTreeType)type name:(NSString *)name;
 - (NSMutableArray *)getSubtrees:(UIKBTree *)tree withType:(UIKBTreeType)type;
 - (NSMutableDictionary *)loadConfigFromPath:(NSString *)path;
-- (void)setupKeyplanesConfig:(NSArray *)keyplaneNames target:(NSMutableDictionary *)targetDict;
 - (void)setupGeometryRowConfig:(NSArray *)geometryRows target:(NSMutableDictionary *)targetDict;
 @property (nonatomic, retain) NSMutableArray *keyboardNames;
 @property (nonatomic, retain) NSString *filePath;
