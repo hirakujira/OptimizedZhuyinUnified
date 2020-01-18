@@ -71,19 +71,19 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
 %hook UIKBTree
 - (NSMutableArray *)subtrees 
 {
-    NSMutableArray *subtree = %orig;
+    NSMutableArray *subtrees = %orig;
     if (isZhuyin != YES)
     {
-        return subtree;
+        return subtrees;
     }
     
-    // if (([self.name containsString:@"Delete"] || [subtree count] > 5) && [self.name containsString:@"List"])
-    // if ([subtree count] > 5 && [self.name containsString:@"List"])
-        // NSLog(@"NSUInteger: %d BigTree is %@",[subtree count] ,self.name);
+    // if (([self.name containsString:@"Delete"] || [subtrees count] > 5) && [self.name containsString:@"List"])
+    // if ([subtrees count] > 5 && [self.name containsString:@"List"])
+        // NSLog(@"NSUInteger: %d BigTree is %@",[subtrees count] ,self.name);
      
     if ([self.name isEqualToString:@"Zhuyin-Letters-Keyset_Row4"]) 
     {
-        if (layout == ZhuyinLayoutComputer && [subtree count] == 10) 
+        if (layout == ZhuyinLayoutComputer && [subtrees count] == 10) 
         {
             NSMutableDictionary* properties = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                 @"，",     @"KBdisplayString",
@@ -92,12 +92,12 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
                 @2,        @"KBinteractionType", nil];
 
             UIKBTree* commaKey = [[UIKBTree alloc] initWithType:8 withName:@"OptimizedZhuyin-Comma-Key" withProperties:properties withSubtrees:nil withCache:nil];
-            [subtree addObject:commaKey];
+            [subtrees addObject:commaKey];
         }
     }
     else if ([self.name isEqualToString:@"Zhuyin-Letters-Keyset_Row3"]) 
     {
-        if ([subtree count] == 10 && layout == ZhuyinLayoutCompact) 
+        if ([subtrees count] == 10 && layout == ZhuyinLayoutCompact) 
         {
             NSMutableDictionary* propertiesComma = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                 @"，",     @"KBdisplayString",
@@ -106,7 +106,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
                 @2,        @"KBinteractionType", nil];
 
             UIKBTree* commaKey = [[UIKBTree alloc] initWithType:8 withName:@"OptimizedZhuyin-Comma-Key" withProperties:propertiesComma withSubtrees:nil withCache:nil];
-            [subtree addObject:commaKey];
+            [subtrees addObject:commaKey];
 
             NSMutableDictionary* propertiesStop = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                 @"。",     @"KBdisplayString",
@@ -115,7 +115,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
                 @2,        @"KBinteractionType", nil];
 
             UIKBTree* stopKey = [[UIKBTree alloc] initWithType:8 withName:@"OptimizedZhuyin-Stop-Key" withProperties:propertiesStop withSubtrees:nil withCache:nil];
-            [subtree addObject:stopKey];
+            [subtrees addObject:stopKey];
         }
     }
 //直向注音位置表 
@@ -129,7 +129,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
-            setShape(subtree,0,9,37.4,2,51,36,41);
+            setShape(subtrees,0,9,37.4,2,51,36,41);
         }
         // return subtree;
     }
@@ -138,16 +138,16 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if (layout == ZhuyinLayoutCompact) 
         {
-            copySubtree(subtree,1);
-            setShape(subtree,0,9,37.4,2,95,36,41);
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(376,51,36,41)];
-            [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(376,95,36,41)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(375,51,36,41)];
-            [(UIKBTree *)subtree[11] setFrame:CGRectMake(375,95,36,41)];
+            copySubtree(subtrees,1);
+            setShape(subtrees,0,9,37.4,2,95,36,41);
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(376,51,36,41)];
+            [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(376,95,36,41)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(375,51,36,41)];
+            [(UIKBTree *)subtrees[11] setFrame:CGRectMake(375,95,36,41)];
         }
         else if (layout == ZhuyinLayoutComputer)
         {
-            setShape(subtree,0,9,37.4,21,95,35,41);
+            setShape(subtrees,0,9,37.4,21,95,35,41);
         }
     }
     else if ([self.name isEqualToString:@"1075436866_414x226_iPhone-PortraitTruffle-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
@@ -155,11 +155,11 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
      {
         if (layout == ZhuyinLayoutComputer) 
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
 
-            setShape(subtree,0,9,37.4,40,139,36,41);
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(2,139,36,41)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(2,139,36,41)];
+            setShape(subtrees,0,9,37.4,40,139,36,41);
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(2,139,36,41)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(2,139,36,41)];
         }
     }
     else if ([self.name isEqualToString:@"1380690174_414x226_iPhone-PortraitTruffle-Eleven-Delete-Geometry-List"] ||
@@ -167,13 +167,13 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if (layout == ZhuyinLayoutCompact) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(376,139,36,41)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(375,139,36,41)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(376,139,36,41)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(375,139,36,41)];
         }
         else if (layout == ZhuyinLayoutComputer) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(376,51,36,41)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(375,51,36,41)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(376,51,36,41)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(375,51,36,41)];
         }
     }
 //==============================================================================
@@ -186,7 +186,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
-            setShape(subtree,0,9,34,1,49,32,38);
+            setShape(subtrees,0,9,34,1,49,32,38);
         }
     }
     else if ([self.name isEqualToString:@"2532305676_375x216_iPhone-PortraitChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
@@ -194,17 +194,17 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutCompact) 
         {
-            copySubtree(subtree,1);
-            setShape(subtree,0,9,34,1,91,32,38);
+            copySubtree(subtrees,1);
+            setShape(subtrees,0,9,34,1,91,32,38);
             
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(342,49,32,38)];
-            [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(342,91,32,38)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(341,49,32,38)];
-            [(UIKBTree *)subtree[11] setFrame:CGRectMake(341,91,32,38)];
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(342,49,32,38)];
+            [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(342,91,32,38)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(341,49,32,38)];
+            [(UIKBTree *)subtrees[11] setFrame:CGRectMake(341,91,32,38)];
         }
         else if (layout == ZhuyinLayoutComputer)
         {
-            setShape(subtree,0,9,34,19,91,32,38);
+            setShape(subtrees,0,9,34,19,91,32,38);
         }
     }
     else if ([self.name isEqualToString:@"3531140261_375x216_iPhone-PortraitChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
@@ -212,11 +212,11 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutComputer)
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
 
-            setShape(subtree,0,9,34,36,133,32,38);
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(1,133,33,38)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(0,133,33,38)];
+            setShape(subtrees,0,9,34,36,133,32,38);
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(1,133,33,38)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(0,133,33,38)];
         }
     }
     else if ([self.name isEqualToString:@"3892020103_375x216_iPhone-PortraitChoco-Eleven-Delete-Geometry-List"] ||
@@ -224,13 +224,13 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutCompact) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(341,133,33,38)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(340,133,33,38)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(341,133,33,38)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(340,133,33,38)];
         }
         else if (layout == ZhuyinLayoutComputer) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(341,49,33,38)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(340,49,33,38)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(341,49,33,38)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(340,49,33,38)];
         }
     }
 //==============================================================================
@@ -244,7 +244,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
-            setShape(subtree,0,9,29,1,47,28,39);
+            setShape(subtrees,0,9,29,1,47,28,39);
         }
     }
     else if ([self.name isEqualToString:@"2936508161_320x216_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"] || //Row 3 iOS 6、7
@@ -253,17 +253,17 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutCompact)
         {
-            copySubtree(subtree,1);
-            setShape(subtree,0,9,29,1,89,28,39);
+            copySubtree(subtrees,1);
+            setShape(subtrees,0,9,29,1,89,28,39);
             
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(291,47,28,39)];
-            [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(291,89,28,39)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(291,47,28,39)];
-            [(UIKBTree *)subtree[11] setFrame:CGRectMake(291,89,28,39)];
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(291,47,28,39)];
+            [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(291,89,28,39)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(291,47,28,39)];
+            [(UIKBTree *)subtrees[11] setFrame:CGRectMake(291,89,28,39)];
         }
         else if (layout == ZhuyinLayoutComputer)
         {
-            setShape(subtree,0,9,29,15,89,28,39);
+            setShape(subtrees,0,9,29,15,89,28,39);
         }
     }
     else if ([self.name isEqualToString:@"2029842703_320x216_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"] || //Row 4 iOS 6、7
@@ -272,11 +272,11 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutComputer) 
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
 
-            setShape(subtree,0,9,29,30,131,28,39);
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(1,131,28,39)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(1,131,28,39)];
+            setShape(subtrees,0,9,29,30,131,28,39);
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(1,131,28,39)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(1,131,28,39)];
         }
     }
 
@@ -286,13 +286,13 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if (layout == ZhuyinLayoutCompact) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(291,131,28,39)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(291,131,28,39)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(291,131,28,39)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(291,131,28,39)];
         }
         else if (layout == ZhuyinLayoutComputer) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(291,47,28,39)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(291,47,28,39)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(291,47,28,39)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(291,47,28,39)];
         }
     }
 
@@ -306,49 +306,49 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
-            setShape(subtree,0,9,51.6,1,37,50.5,29);
+            setShape(subtrees,0,9,51.6,1,37,50.5,29);
         }
     }
     else if (isTargetGeometryList(self.name, @"Caymen", @"Row3-Geometry-List"))
     {
         if (layout == ZhuyinLayoutCompact) 
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
-            [subtree addObject: [(UIKBTree *)subtree[1] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[1] copy]];
 
-            setShape(subtree,0,9,51.6,1,68,50.5,29);
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(517,37,50.5,29)];
-            [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(517,68,50.5,29)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(516,37,51.6,29)];
-            [(UIKBTree *)subtree[11] setFrame:CGRectMake(516,68,51.6,29)];
+            setShape(subtrees,0,9,51.6,1,68,50.5,29);
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(517,37,50.5,29)];
+            [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(517,68,50.5,29)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(516,37,51.6,29)];
+            [(UIKBTree *)subtrees[11] setFrame:CGRectMake(516,68,51.6,29)];
         }
         else if (layout == ZhuyinLayoutComputer)
         {
-            setShape(subtree,0,9,51.6,26,68,50.5,29);
+            setShape(subtrees,0,9,51.6,26,68,50.5,29);
         }
     }
     else if (isTargetGeometryList(self.name, @"Caymen", @"Row4-Geometry-List"))
     {
         if (layout == ZhuyinLayoutComputer) 
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
             
-            setShape(subtree,0,9,51.6,52.6,100,50.5,29);
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(1,100,50.5,29)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(0,100,50.5,29)];
+            setShape(subtrees,0,9,51.6,52.6,100,50.5,29);
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(1,100,50.5,29)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(0,100,50.5,29)];
         }
     }
     else if (isTargetGeometryList(self.name, @"Caymen", @"Delete-Geometry-List"))
     {
         if (layout == ZhuyinLayoutCompact) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(517,100,50.5,29)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(516,100,51.6,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(517,100,50.5,29)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(516,100,51.6,29)];
         }
         else if (layout == ZhuyinLayoutComputer) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(517,37,50.5,29)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(516,37,51.6,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(517,37,50.5,29)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(516,37,51.6,29)];
         }
     }
 //iPhone 6 Plus
@@ -359,7 +359,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         {
             if (iOS11)
             {
-                setShape(subtree,0,9,53.5,74,5,52.5,29);
+                setShape(subtrees,0,9,53.5,74,5,52.5,29);
             }
         }
     
@@ -371,11 +371,11 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         {
             if (iOS11)
             {
-                setShape(subtree,0,9,53.5,74,37,52.5,29);
+                setShape(subtrees,0,9,53.5,74,37,52.5,29);
             }
             else
             {
-                setShape(subtree,0,9,48,104,37,47,29);
+                setShape(subtrees,0,9,48,104,37,47,29);
             }
         }
     }
@@ -384,31 +384,31 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutCompact) 
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
-            [subtree addObject: [(UIKBTree *)subtree[1] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[1] copy]];
             if (iOS11)
             {
-                setShape(subtree,0,9,53.5,74,68,52.5,29);
-                [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(610,37,52.5,29)];
-                [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(610,68,52.5,29)];
-                [(UIKBTree *)subtree[10] setFrame:CGRectMake(610,37,52.5,29)];
-                [(UIKBTree *)subtree[11] setFrame:CGRectMake(610,68,52.5,29)];
+                setShape(subtrees,0,9,53.5,74,68,52.5,29);
+                [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(610,37,52.5,29)];
+                [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(610,68,52.5,29)];
+                [(UIKBTree *)subtrees[10] setFrame:CGRectMake(610,37,52.5,29)];
+                [(UIKBTree *)subtrees[11] setFrame:CGRectMake(610,68,52.5,29)];
             }
             else
             {
-                setShape(subtree,0,9,48,104,68,47,29);
+                setShape(subtrees,0,9,48,104,68,47,29);
 
-                [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(585,37,47,29)];
-                [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(585,68,47,29)];
-                [(UIKBTree *)subtree[10] setFrame:CGRectMake(584,37,47,29)];
-                [(UIKBTree *)subtree[11] setFrame:CGRectMake(584,68,47,29)];
+                [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(585,37,47,29)];
+                [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(585,68,47,29)];
+                [(UIKBTree *)subtrees[10] setFrame:CGRectMake(584,37,47,29)];
+                [(UIKBTree *)subtrees[11] setFrame:CGRectMake(584,68,47,29)];
             }
         }
         else if (layout == ZhuyinLayoutComputer) 
         {
             if (iOS11)
             {
-                setShape(subtree,0,9,53.5,101,68,52.5,29);
+                setShape(subtrees,0,9,53.5,101,68,52.5,29);
             }
         }
 
@@ -418,19 +418,19 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
      { 
         if (layout == ZhuyinLayoutComputer) 
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
 
             if (iOS11)
             {
-                setShape(subtree,0,9,53.5,128,100,52.5,29);
-                [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(74,100,52.5,29)];
-                [(UIKBTree *)subtree[10] setFrame:CGRectMake(74,100,52.5,29)];
+                setShape(subtrees,0,9,53.5,128,100,52.5,29);
+                [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(74,100,52.5,29)];
+                [(UIKBTree *)subtrees[10] setFrame:CGRectMake(74,100,52.5,29)];
             }
             else
             {
-                setShape(subtree,0,9,48,151,100,47,29);
-                [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(104,100,46,29)];
-                [(UIKBTree *)subtree[10] setFrame:CGRectMake(104,100,46,29)];
+                setShape(subtrees,0,9,48,151,100,47,29);
+                [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(104,100,46,29)];
+                [(UIKBTree *)subtrees[10] setFrame:CGRectMake(104,100,46,29)];
             }
         }
     }
@@ -441,26 +441,26 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         {
             if (iOS11)
             {
-                [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(610,100,52.5,29)];
-                [(UIKBTree *)subtree[0] setFrame:CGRectMake(610,100,52.5,29)];
+                [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(610,100,52.5,29)];
+                [(UIKBTree *)subtrees[0] setFrame:CGRectMake(610,100,52.5,29)];
             }
             else
             {
-                [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(585,100,47,29)];
-                [(UIKBTree *)subtree[0] setFrame:CGRectMake(584,100,47,29)];
+                [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(585,100,47,29)];
+                [(UIKBTree *)subtrees[0] setFrame:CGRectMake(584,100,47,29)];
             }
         }
         else if (layout == ZhuyinLayoutComputer) 
         {
             if (iOS11)
             {
-                [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(610,37,52.5,29)];
-                [(UIKBTree *)subtree[0] setFrame:CGRectMake(610,37,52.5,29)];
+                [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(610,37,52.5,29)];
+                [(UIKBTree *)subtrees[0] setFrame:CGRectMake(610,37,52.5,29)];
             }
             else
             {
-                [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(585,37,47,29)];
-                [(UIKBTree *)subtree[0] setFrame:CGRectMake(584,37,47,29)];
+                [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(585,37,47,29)];
+                [(UIKBTree *)subtrees[0] setFrame:CGRectMake(584,37,47,29)];
             }
         }
     }
@@ -474,7 +474,7 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer))
         {
-            setShape(subtree,0,9,48,70,37,47,29);
+            setShape(subtrees,0,9,48,70,37,47,29);
         }
     }
     else if ([self.name isEqualToString:@"1615233310_667x162_iPhone-LandscapeChoco-Five-Row-Zhuyin-Row-Three-Geometry-List"] ||
@@ -482,18 +482,18 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutCompact) 
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
-            [subtree addObject: [(UIKBTree *)subtree[1] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[1] copy]];
 
-            setShape(subtree,0,9,48,70,68,47,29);
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(550,37,46,29)];
-            [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(550,68,46,29)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(549,37,47,29)];
-            [(UIKBTree *)subtree[11] setFrame:CGRectMake(549,68,47,29)];
+            setShape(subtrees,0,9,48,70,68,47,29);
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(550,37,46,29)];
+            [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(550,68,46,29)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(549,37,47,29)];
+            [(UIKBTree *)subtrees[11] setFrame:CGRectMake(549,68,47,29)];
         }
         else if (layout == ZhuyinLayoutComputer)
         {
-            setShape(subtree,0,9,48,89,68,47,29);
+            setShape(subtrees,0,9,48,89,68,47,29);
         }
     }
     else if ([self.name isEqualToString:@"3913116670_667x162_iPhone-LandscapeChoco-Left-Aligned-Ten-on-Eleven-Geometry-List"] ||
@@ -501,11 +501,11 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutComputer) 
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
             
-            setShape(subtree,0,9,48,118,100,47,29);
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(70,100,47,29)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(69,100,47,29)];
+            setShape(subtrees,0,9,48,118,100,47,29);
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(70,100,47,29)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(69,100,47,29)];
         }
     }
     else if ([self.name isEqualToString:@"2264922919_667x162_iPhone-LandscapeChoco-Eleven-Delete-Geometry-List"] ||
@@ -513,13 +513,13 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     { 
         if (layout == ZhuyinLayoutCompact) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(550,100,47,29)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(549,100,47,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(550,100,47,29)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(549,100,47,29)];
         }
         else if (layout == ZhuyinLayoutComputer) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(550,37,47,29)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(549,37,47,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(550,37,47,29)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(549,37,47,29)];
         }
     }
     
@@ -528,106 +528,106 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if ((layout == ZhuyinLayoutCompact || layout == ZhuyinLayoutComputer)) 
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(1,37,42,29)];
-            [(UIKBTree *)subtree[1] setPaddedFrame:CGRectMake(44,37,43,29)];
-            [(UIKBTree *)subtree[2] setPaddedFrame:CGRectMake(88,37,42,29)];
-            [(UIKBTree *)subtree[3] setPaddedFrame:CGRectMake(131,37,43,29)];
-            [(UIKBTree *)subtree[4] setPaddedFrame:CGRectMake(175,37,43,29)];
-            [(UIKBTree *)subtree[5] setPaddedFrame:CGRectMake(219,37,42,29)];
-            [(UIKBTree *)subtree[6] setPaddedFrame:CGRectMake(262,37,43,29)];
-            [(UIKBTree *)subtree[7] setPaddedFrame:CGRectMake(306,37,43,29)];
-            [(UIKBTree *)subtree[8] setPaddedFrame:CGRectMake(350,37,42,29)];
-            [(UIKBTree *)subtree[9] setPaddedFrame:CGRectMake(393,37,43,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(1,37,42,29)];
+            [(UIKBTree *)subtrees[1] setPaddedFrame:CGRectMake(44,37,43,29)];
+            [(UIKBTree *)subtrees[2] setPaddedFrame:CGRectMake(88,37,42,29)];
+            [(UIKBTree *)subtrees[3] setPaddedFrame:CGRectMake(131,37,43,29)];
+            [(UIKBTree *)subtrees[4] setPaddedFrame:CGRectMake(175,37,43,29)];
+            [(UIKBTree *)subtrees[5] setPaddedFrame:CGRectMake(219,37,42,29)];
+            [(UIKBTree *)subtrees[6] setPaddedFrame:CGRectMake(262,37,43,29)];
+            [(UIKBTree *)subtrees[7] setPaddedFrame:CGRectMake(306,37,43,29)];
+            [(UIKBTree *)subtrees[8] setPaddedFrame:CGRectMake(350,37,42,29)];
+            [(UIKBTree *)subtrees[9] setPaddedFrame:CGRectMake(393,37,43,29)];
 
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(1,37,42,29)];
-            [(UIKBTree *)subtree[1] setFrame:CGRectMake(44,37,43,29)];
-            [(UIKBTree *)subtree[2] setFrame:CGRectMake(88,37,42,29)];
-            [(UIKBTree *)subtree[3] setFrame:CGRectMake(131,37,43,29)];
-            [(UIKBTree *)subtree[4] setFrame:CGRectMake(175,37,43,29)];
-            [(UIKBTree *)subtree[5] setFrame:CGRectMake(219,37,42,29)];
-            [(UIKBTree *)subtree[6] setFrame:CGRectMake(262,37,43,29)];
-            [(UIKBTree *)subtree[7] setFrame:CGRectMake(306,37,43,29)];
-            [(UIKBTree *)subtree[8] setFrame:CGRectMake(350,37,42,29)];
-            [(UIKBTree *)subtree[9] setFrame:CGRectMake(393,37,43,29)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(1,37,42,29)];
+            [(UIKBTree *)subtrees[1] setFrame:CGRectMake(44,37,43,29)];
+            [(UIKBTree *)subtrees[2] setFrame:CGRectMake(88,37,42,29)];
+            [(UIKBTree *)subtrees[3] setFrame:CGRectMake(131,37,43,29)];
+            [(UIKBTree *)subtrees[4] setFrame:CGRectMake(175,37,43,29)];
+            [(UIKBTree *)subtrees[5] setFrame:CGRectMake(219,37,42,29)];
+            [(UIKBTree *)subtrees[6] setFrame:CGRectMake(262,37,43,29)];
+            [(UIKBTree *)subtrees[7] setFrame:CGRectMake(306,37,43,29)];
+            [(UIKBTree *)subtrees[8] setFrame:CGRectMake(350,37,42,29)];
+            [(UIKBTree *)subtrees[9] setFrame:CGRectMake(393,37,43,29)];
         }
     }
     else if ([self.name isEqualToString:@"1209170427_480x162_iPhone-Proportional-Five-Row-Ten-on-Ten-2-Geometry-List"]) //Row 3
     {
         if (layout == ZhuyinLayoutCompact)
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(1,68,42,29)];
-            [(UIKBTree *)subtree[1] setPaddedFrame:CGRectMake(44,68,43,29)];
-            [(UIKBTree *)subtree[2] setPaddedFrame:CGRectMake(88,68,42,29)];
-            [(UIKBTree *)subtree[3] setPaddedFrame:CGRectMake(131,68,43,29)];
-            [(UIKBTree *)subtree[4] setPaddedFrame:CGRectMake(175,68,43,29)];
-            [(UIKBTree *)subtree[5] setPaddedFrame:CGRectMake(219,68,42,29)];
-            [(UIKBTree *)subtree[6] setPaddedFrame:CGRectMake(262,68,43,29)];
-            [(UIKBTree *)subtree[7] setPaddedFrame:CGRectMake(306,68,43,29)];
-            [(UIKBTree *)subtree[8] setPaddedFrame:CGRectMake(350,68,42,29)];
-            [(UIKBTree *)subtree[9] setPaddedFrame:CGRectMake(393,68,43,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(1,68,42,29)];
+            [(UIKBTree *)subtrees[1] setPaddedFrame:CGRectMake(44,68,43,29)];
+            [(UIKBTree *)subtrees[2] setPaddedFrame:CGRectMake(88,68,42,29)];
+            [(UIKBTree *)subtrees[3] setPaddedFrame:CGRectMake(131,68,43,29)];
+            [(UIKBTree *)subtrees[4] setPaddedFrame:CGRectMake(175,68,43,29)];
+            [(UIKBTree *)subtrees[5] setPaddedFrame:CGRectMake(219,68,42,29)];
+            [(UIKBTree *)subtrees[6] setPaddedFrame:CGRectMake(262,68,43,29)];
+            [(UIKBTree *)subtrees[7] setPaddedFrame:CGRectMake(306,68,43,29)];
+            [(UIKBTree *)subtrees[8] setPaddedFrame:CGRectMake(350,68,42,29)];
+            [(UIKBTree *)subtrees[9] setPaddedFrame:CGRectMake(393,68,43,29)];
 
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(1,68,42,29)];
-            [(UIKBTree *)subtree[1] setFrame:CGRectMake(44,68,43,29)];
-            [(UIKBTree *)subtree[2] setFrame:CGRectMake(88,68,42,29)];
-            [(UIKBTree *)subtree[3] setFrame:CGRectMake(131,68,43,29)];
-            [(UIKBTree *)subtree[4] setFrame:CGRectMake(175,68,43,29)];
-            [(UIKBTree *)subtree[5] setFrame:CGRectMake(219,68,42,29)];
-            [(UIKBTree *)subtree[6] setFrame:CGRectMake(262,68,43,29)];
-            [(UIKBTree *)subtree[7] setFrame:CGRectMake(306,68,43,29)];
-            [(UIKBTree *)subtree[8] setFrame:CGRectMake(350,68,42,29)];
-            [(UIKBTree *)subtree[9] setFrame:CGRectMake(393,68,43,29)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(1,68,42,29)];
+            [(UIKBTree *)subtrees[1] setFrame:CGRectMake(44,68,43,29)];
+            [(UIKBTree *)subtrees[2] setFrame:CGRectMake(88,68,42,29)];
+            [(UIKBTree *)subtrees[3] setFrame:CGRectMake(131,68,43,29)];
+            [(UIKBTree *)subtrees[4] setFrame:CGRectMake(175,68,43,29)];
+            [(UIKBTree *)subtrees[5] setFrame:CGRectMake(219,68,42,29)];
+            [(UIKBTree *)subtrees[6] setFrame:CGRectMake(262,68,43,29)];
+            [(UIKBTree *)subtrees[7] setFrame:CGRectMake(306,68,43,29)];
+            [(UIKBTree *)subtrees[8] setFrame:CGRectMake(350,68,42,29)];
+            [(UIKBTree *)subtrees[9] setFrame:CGRectMake(393,68,43,29)];
 
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
-            [subtree addObject: [(UIKBTree *)subtree[1] copy]];
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(437,37,42,29)];
-            [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(437,68,42,29)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(437,37,42,29)];
-            [(UIKBTree *)subtree[11] setFrame:CGRectMake(437,68,42,29)];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[1] copy]];
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(437,37,42,29)];
+            [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(437,68,42,29)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(437,37,42,29)];
+            [(UIKBTree *)subtrees[11] setFrame:CGRectMake(437,68,42,29)];
         }
     }
     else if ([self.name isEqualToString:@"1009229979_480x162_iPhone-Proportional-Left-Aligned-Ten-on-Eleven-Geometry-List"]) //Row 4
     {
         if (layout == ZhuyinLayoutComputer)
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
 
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(44,100,43,29)];
-            [(UIKBTree *)subtree[1] setPaddedFrame:CGRectMake(88,100,42,29)];
-            [(UIKBTree *)subtree[2] setPaddedFrame:CGRectMake(131,100,43,29)];
-            [(UIKBTree *)subtree[3] setPaddedFrame:CGRectMake(175,100,43,29)];
-            [(UIKBTree *)subtree[4] setPaddedFrame:CGRectMake(219,100,42,29)];
-            [(UIKBTree *)subtree[5] setPaddedFrame:CGRectMake(262,100,43,29)];
-            [(UIKBTree *)subtree[6] setPaddedFrame:CGRectMake(306,100,43,29)];
-            [(UIKBTree *)subtree[7] setPaddedFrame:CGRectMake(350,100,42,29)];
-            [(UIKBTree *)subtree[8] setPaddedFrame:CGRectMake(393,100,43,29)];
-            [(UIKBTree *)subtree[9] setPaddedFrame:CGRectMake(437,100,43,29)];
-            [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(1,100,42,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(44,100,43,29)];
+            [(UIKBTree *)subtrees[1] setPaddedFrame:CGRectMake(88,100,42,29)];
+            [(UIKBTree *)subtrees[2] setPaddedFrame:CGRectMake(131,100,43,29)];
+            [(UIKBTree *)subtrees[3] setPaddedFrame:CGRectMake(175,100,43,29)];
+            [(UIKBTree *)subtrees[4] setPaddedFrame:CGRectMake(219,100,42,29)];
+            [(UIKBTree *)subtrees[5] setPaddedFrame:CGRectMake(262,100,43,29)];
+            [(UIKBTree *)subtrees[6] setPaddedFrame:CGRectMake(306,100,43,29)];
+            [(UIKBTree *)subtrees[7] setPaddedFrame:CGRectMake(350,100,42,29)];
+            [(UIKBTree *)subtrees[8] setPaddedFrame:CGRectMake(393,100,43,29)];
+            [(UIKBTree *)subtrees[9] setPaddedFrame:CGRectMake(437,100,43,29)];
+            [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(1,100,42,29)];
 
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(44,100,43,29)];
-            [(UIKBTree *)subtree[1] setFrame:CGRectMake(88,100,42,29)];
-            [(UIKBTree *)subtree[2] setFrame:CGRectMake(131,100,43,29)];
-            [(UIKBTree *)subtree[3] setFrame:CGRectMake(175,100,43,29)];
-            [(UIKBTree *)subtree[4] setFrame:CGRectMake(219,100,42,29)];
-            [(UIKBTree *)subtree[5] setFrame:CGRectMake(262,100,43,29)];
-            [(UIKBTree *)subtree[6] setFrame:CGRectMake(306,100,43,29)];
-            [(UIKBTree *)subtree[7] setFrame:CGRectMake(350,100,42,29)];
-            [(UIKBTree *)subtree[8] setFrame:CGRectMake(393,100,43,29)];
-            [(UIKBTree *)subtree[9] setFrame:CGRectMake(437,100,43,29)];
-            [(UIKBTree *)subtree[10] setFrame:CGRectMake(1,100,42,29)];
-            //NSLog(@"sub tree %@",subtree[10]);
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(44,100,43,29)];
+            [(UIKBTree *)subtrees[1] setFrame:CGRectMake(88,100,42,29)];
+            [(UIKBTree *)subtrees[2] setFrame:CGRectMake(131,100,43,29)];
+            [(UIKBTree *)subtrees[3] setFrame:CGRectMake(175,100,43,29)];
+            [(UIKBTree *)subtrees[4] setFrame:CGRectMake(219,100,42,29)];
+            [(UIKBTree *)subtrees[5] setFrame:CGRectMake(262,100,43,29)];
+            [(UIKBTree *)subtrees[6] setFrame:CGRectMake(306,100,43,29)];
+            [(UIKBTree *)subtrees[7] setFrame:CGRectMake(350,100,42,29)];
+            [(UIKBTree *)subtrees[8] setFrame:CGRectMake(393,100,43,29)];
+            [(UIKBTree *)subtrees[9] setFrame:CGRectMake(437,100,43,29)];
+            [(UIKBTree *)subtrees[10] setFrame:CGRectMake(1,100,42,29)];
+            //NSLog(@"sub tree %@",subtrees[10]);
         }
     }
     else if ([self.name isEqualToString:@"1080426452_480x162_iPhone-Proportional-Eleven-Delete-Geometry-List"])
     {
         if (layout == ZhuyinLayoutCompact)
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(437,100,42,29)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(437,100,42,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(437,100,42,29)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(437,100,42,29)];
         }
         else if (layout == ZhuyinLayoutComputer)
         {
-            [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(437,37,42,29)];
-            [(UIKBTree *)subtree[0] setFrame:CGRectMake(437,37,42,29)];
+            [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(437,37,42,29)];
+            [(UIKBTree *)subtrees[0] setFrame:CGRectMake(437,37,42,29)];
         }
     }
 //==============================================================================
@@ -642,11 +642,11 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         {
             if (iOS11)
             {
-                setShape(subtree,0,9,51.5,1,37,50.5,29);
+                setShape(subtrees,0,9,51.5,1,37,50.5,29);
             }
             else
             {
-                setShape(subtree,0,9,48,21,37,47,29);
+                setShape(subtrees,0,9,48,21,37,47,29);
             }
         }
     }
@@ -655,33 +655,33 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if (layout == ZhuyinLayoutCompact)
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
-            [subtree addObject: [(UIKBTree *)subtree[1] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[1] copy]];
 
             if (iOS11)
             {
-                setShape(subtree,0,9,51.5,1,68,50.5,29);
+                setShape(subtrees,0,9,51.5,1,68,50.5,29);
 
-                [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(516,37,50.5,29)];
-                [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(516,68,50.5,29)];
-                [(UIKBTree *)subtree[10] setFrame:CGRectMake(516,37,50.5,29)];
-                [(UIKBTree *)subtree[11] setFrame:CGRectMake(516,68,50.5,29)];
+                [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(516,37,50.5,29)];
+                [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(516,68,50.5,29)];
+                [(UIKBTree *)subtrees[10] setFrame:CGRectMake(516,37,50.5,29)];
+                [(UIKBTree *)subtrees[11] setFrame:CGRectMake(516,68,50.5,29)];
             }
             else
             {
-                setShape(subtree,0,9,48,21,68,47,29);
+                setShape(subtrees,0,9,48,21,68,47,29);
                 
-                [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(500,37,47,29)];
-                [(UIKBTree *)subtree[11] setPaddedFrame:CGRectMake(500,68,47,29)];
-                [(UIKBTree *)subtree[10] setFrame:CGRectMake(500,37,47,29)];
-                [(UIKBTree *)subtree[11] setFrame:CGRectMake(500,68,47,29)];
+                [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(500,37,47,29)];
+                [(UIKBTree *)subtrees[11] setPaddedFrame:CGRectMake(500,68,47,29)];
+                [(UIKBTree *)subtrees[10] setFrame:CGRectMake(500,37,47,29)];
+                [(UIKBTree *)subtrees[11] setFrame:CGRectMake(500,68,47,29)];
             }
         }
         if (layout == ZhuyinLayoutComputer)
         {
             if (iOS11)
             {
-                setShape(subtree,0,9,51.5,27,68,50.5,29);
+                setShape(subtrees,0,9,51.5,27,68,50.5,29);
             }
         }
     }
@@ -690,24 +690,24 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
     {
         if (layout == ZhuyinLayoutComputer)
         {
-            [subtree addObject: [(UIKBTree *)subtree[0] copy]];
+            [subtrees addObject: [(UIKBTree *)subtrees[0] copy]];
             if (iOS11)
             {
-                setShape(subtree,0,9,51.5,52,100,50.5,29);
-                [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(1,100,50.5,29)];
-                [(UIKBTree *)subtree[10] setFrame:CGRectMake(1,100,50.5,29)];
+                setShape(subtrees,0,9,51.5,52,100,50.5,29);
+                [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(1,100,50.5,29)];
+                [(UIKBTree *)subtrees[10] setFrame:CGRectMake(1,100,50.5,29)];
             }
             else
             {
-                setShape(subtree,0,9,48,68,100,47,29);
-                [(UIKBTree *)subtree[10] setPaddedFrame:CGRectMake(21,100,46,29)];
-                [(UIKBTree *)subtree[10] setFrame:CGRectMake(21,100,46,29)];
+                setShape(subtrees,0,9,48,68,100,47,29);
+                [(UIKBTree *)subtrees[10] setPaddedFrame:CGRectMake(21,100,46,29)];
+                [(UIKBTree *)subtrees[10] setFrame:CGRectMake(21,100,46,29)];
             }
         }
         if (layout == ZhuyinLayoutCompact) {
             if (iOS11)
             {
-                setShape(subtree,0,9,51.5,1,100,50.5,29);
+                setShape(subtrees,0,9,51.5,1,100,50.5,29);
             }
         }
     }
@@ -717,29 +717,29 @@ static BOOL isTargetGeometryList(NSString* geomeryListName, NSString *keyboardTy
         if (layout == ZhuyinLayoutCompact) {
             if (iOS11)
             {
-                [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(516,100,50.5,29)];
-                [(UIKBTree *)subtree[0] setFrame:CGRectMake(516,100,50.5,29)];
+                [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(516,100,50.5,29)];
+                [(UIKBTree *)subtrees[0] setFrame:CGRectMake(516,100,50.5,29)];
             }
             else
             {
-                [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(500,100,47,29)];
-                [(UIKBTree *)subtree[0] setFrame:CGRectMake(500,100,47,29)];
+                [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(500,100,47,29)];
+                [(UIKBTree *)subtrees[0] setFrame:CGRectMake(500,100,47,29)];
             }
         }
         else if (layout == ZhuyinLayoutComputer) {
             if (iOS11)
             {
-                [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(516,37,50.5,29)];
-                [(UIKBTree *)subtree[0] setFrame:CGRectMake(516,37,50.5,29)];
+                [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(516,37,50.5,29)];
+                [(UIKBTree *)subtrees[0] setFrame:CGRectMake(516,37,50.5,29)];
             }
             else
             {
-                [(UIKBTree *)subtree[0] setPaddedFrame:CGRectMake(500,37,47,29)];
-                [(UIKBTree *)subtree[0] setFrame:CGRectMake(500,37,47,29)];
+                [(UIKBTree *)subtrees[0] setPaddedFrame:CGRectMake(500,37,47,29)];
+                [(UIKBTree *)subtrees[0] setFrame:CGRectMake(500,37,47,29)];
             }                
         }
     }
-    return subtree;
+    return subtrees;
 }
 
  //讀取鍵盤內容用，需要時再打開
