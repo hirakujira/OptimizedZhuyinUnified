@@ -1,8 +1,8 @@
 {
 	entry = {
-		bundle = OptimizedZhuyin;
+		bundle = OptimizedZhuyinUnified;
 		cell = PSLinkCell;
-		detail = "OptimizedZhuyinListController";
+		detail = "OptimizedZhuyinMainController";
 		icon = "Icon.png";
 		isController = 1;
 		label = "Optimized Zhuyin";

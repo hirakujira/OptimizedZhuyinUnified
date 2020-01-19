@@ -1,11 +1,26 @@
 #!/bin/sh
 if [[ $1 == install || update ]]; then
 
-echo "Cleaning keyboard cache..."
-cd /var/mobile/Library/Caches
-rm -Rf ./com.apple.keyboards/
+    echo "Cleaning keyboard cache..."
+    rm -rf /var/mobile/Library/Caches/com.apple.keyboards/
 
-declare -a cydia
+    version=$(sw_vers | grep -c 'ProductVersion: 5')
+
+    if [[ $version == 0 ]]; then
+        echo "Removing legacy tweak..."
+        rm -rf /Library/PreferenceBundles/OptimizedZhuyin5.bundle
+        rm -f /Library/PreferenceLoader/Preferences/OptimizedZhuyin5.plist
+        rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin5.dylib
+        rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin5.plist
+    else
+        echo "Removing modern tweak..."
+        rm -rf /Library/PreferenceBundles/OptimizedZhuyinUnified.bundle
+        rm -f /Library/PreferenceLoader/Preferences/OptimizedZhuyinUnified.plist
+        rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyinUnified.dylib
+        rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyinUnified.plist
+    fi
+
+    declare -a cydia
     cydia=($CYDIA)
     if [[ ${CYDIA+@} ]]; then
         eval "echo 'finish:reload' >&${cydia[0]}"

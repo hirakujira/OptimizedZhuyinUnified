@@ -1,17 +1,18 @@
-TWEAK_NAME = OptimizedZhuyin
-OptimizedZhuyin_FILES = Tweak.xm KBDumper.mm
-OptimizedZhuyin_CFLAGS = -F$(SYSROOT)/System/Library/CoreServices -fobjc-arc
-OptimizedZhuyin_PRIVATE_FRAMEWORKS = UIKit Foundation
+TWEAK_NAME = OptimizedZhuyinUnified
+OptimizedZhuyinUnified_FILES = Tweak.xm KBDumper.mm
+OptimizedZhuyinUnified_CFLAGS = -F$(SYSROOT)/System/Library/CoreServices -fobjc-arc
+OptimizedZhuyinUnified_PRIVATE_FRAMEWORKS = UIKit Foundation
 
 SYSROOT = $(THEOS)/sdks/iPhoneOS9.2.sdk
 TARGET = iphone:latest:6.0
 ARCHS = armv7 arm64 arm64e
 
-OptimizedZhuyin_LDFLAGS += -Wl,-segalign,4000
+OptimizedZhuyinUnified_LDFLAGS += -Wl,-segalign,4000
 GO_EASY_ON_ME = 1
 FINALPACKAGE = 1
 
 SUBPROJECTS += Preferences
+SUBPROJECTS += iOS5 # You can comment this if you don't want to build this tweak for iOS 5
 
 include $(THEOS)/makefiles/common.mk
 include $(THEOS_MAKE_PATH)/tweak.mk

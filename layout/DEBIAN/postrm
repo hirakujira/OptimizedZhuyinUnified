@@ -1,11 +1,10 @@
 #!/bin/sh
 if [[ $1 == remove ]]; then
 
-echo "Cleaning keyboard cache..."
-cd /var/mobile/Library/Caches
-rm -Rf ./com.apple.keyboards/
+    echo "Cleaning keyboard cache..."
+    rm -rf /var/mobile/Library/Caches/com.apple.keyboards/
 
-declare -a cydia
+    declare -a cydia
     cydia=($CYDIA)
     if [[ ${CYDIA+@} ]]; then
         eval "echo 'finish:reload' >&${cydia[0]}"

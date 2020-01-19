@@ -1,13 +1,13 @@
-TWEAK_NAME = OptimizedZhuyin
-OptimizedZhuyin_FILES = ../Tweak.xm ../KBDumper.mm
-OptimizedZhuyin_CFLAGS = -F$(SYSROOT)/System/Library/CoreServices -fobjc-arc
-OptimizedZhuyin_PRIVATE_FRAMEWORKS = UIKit Foundation
+TWEAK_NAME = OptimizedZhuyinUnified
+OptimizedZhuyinUnified_FILES = ../Tweak.xm ../KBDumper.mm
+OptimizedZhuyinUnified_CFLAGS = -F$(SYSROOT)/System/Library/CoreServices -fobjc-arc
+OptimizedZhuyinUnified_PRIVATE_FRAMEWORKS = UIKit Foundation
 
 TARGET = simulator:clang
 SDKVERSION = 10.2
 SYSROOT = /opt/theos/sdks/iPhoneSimulator10.3.sdk
 
-OptimizedZhuyin_LDFLAGS += -Wl,-segalign,4000
+OptimizedZhuyinUnified_LDFLAGS += -Wl,-segalign,4000
 GO_EASY_ON_ME = 1
 FINALPACKAGE = 1
 
@@ -16,6 +16,6 @@ include $(THEOS_MAKE_PATH)/tweak.mk
 include $(THEOS_MAKE_PATH)/aggregate.mk
 
 sync: stage
-	cp .theos/_/Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin.dylib /opt/simject/OptimizedZhuyin.dylib
-	ldid -S /opt/simject/OptimizedZhuyin.dylib
+	cp .theos/_/Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyinUnified.dylib /opt/simject/OptimizedZhuyinUnified.dylib
+	ldid -S /opt/simject/OptimizedZhuyinUnified.dylib
 	respring_simulator
