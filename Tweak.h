@@ -35,10 +35,9 @@ typedef enum {
 //==============================================================================
 static ZhuyinLayout layout;
 static BOOL isZhuyin;
-static BOOL isLandscape;
 
 static KBDumper *dumper;
 static BOOL showVerifyError = NO;
 
-NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/tw.hiraku.optimizedzhuyin.plist"];
+NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:SETTINGS_PATH];
 static double ss;

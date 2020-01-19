@@ -2,7 +2,7 @@
 
 static int respring;
 
-void addRespringButtonCallBack () 
+void addRespringButtonCallBack() 
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AddRespringButton" object:nil];
 }
@@ -49,7 +49,6 @@ void addRespringButtonCallBack ()
 	return @"認同皮樂即可免費使用";
 }
 
-
 - (id)readPreferenceValue:(PSSpecifier *)specifier 
 {
 	NSString *path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
@@ -73,7 +72,7 @@ void addRespringButtonCallBack ()
 {
     UIAlertView *alert =
     [[UIAlertView alloc] initWithTitle:@"提醒"
-                               message:@"要儲存設定，必須重新啟動SpringBoard，您要現在重新啟動SpringBoard嗎？"
+                               message:@"要儲存設定，必須重新啟動主畫面，您要現在重新啟動主畫面嗎？"
                               delegate:self
                      cancelButtonTitle:@"稍後"
                      otherButtonTitles:@"好", nil];
