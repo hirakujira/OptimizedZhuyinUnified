@@ -3,12 +3,12 @@ Priority: optional
 Section: Tweaks
 Maintainer: Hiraku <dev@hiraku.tw>
 Architecture: iphoneos-arm
-Version: 3.0
+Version: 3.0.1
 Replaces: com.hiraku.optimizedzhuyin, com.hiraku.optimizedzhuyin6, com.hiraku.optimizedzhuyin7, com.hiraku.optimizedzhuyin8
 Provides: com.hiraku.optimizedzhuyin, com.hiraku.optimizedzhuyin6, com.hiraku.optimizedzhuyin7, com.hiraku.optimizedzhuyin8
 Conflicts: com.hiraku.optimizedzhuyin, com.hiraku.optimizedzhuyin6, com.hiraku.optimizedzhuyin7, com.hiraku.optimizedzhuyin8
-Description: 優化注音 iOS 5~13
+Description: 優化注音 iOS 5~14
 Name:Optimized Zhuyin Unified
 Depends: preferenceloader, mobilesubstrate, firmware (>= 5.0)
 Author: Hiraku <dev@hiraku.tw>
-Depiction: Optimized Zhuyin Unified 是整合 iOS 5 ~ iOS 13 的版本，在所有裝置上都可免費使用。
+Depiction: Optimized Zhuyin Unified 是整合 iOS 5 ~ iOS 14 的版本，在所有裝置上都可免費使用。

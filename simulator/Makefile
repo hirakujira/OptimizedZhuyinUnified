@@ -18,4 +18,4 @@ include $(THEOS_MAKE_PATH)/aggregate.mk
 sync: stage
 	cp .theos/_/Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyinUnified.dylib /opt/simject/OptimizedZhuyinUnified.dylib
 	ldid -S /opt/simject/OptimizedZhuyinUnified.dylib
-	respring_simulator
+	resim
