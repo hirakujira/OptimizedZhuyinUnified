@@ -1,6 +1,7 @@
 #import <Preferences/PSControlTableCell.h>
 #import <Preferences/PSListController.h>
 #import <UIKit/UIKit.h>
+#import <firmware.h>
 
 @interface PSSpecifier (OptimizedZhuyin)
 @property(retain, nonatomic) NSDictionary* properties;

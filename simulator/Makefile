@@ -7,7 +7,6 @@ TARGET = simulator:clang
 SDKVERSION = 10.2
 SYSROOT = /opt/theos/sdks/iPhoneSimulator10.3.sdk
 
-OptimizedZhuyinUnified_LDFLAGS += -Wl,-segalign,4000
 GO_EASY_ON_ME = 1
 FINALPACKAGE = 1
 

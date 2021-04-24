@@ -70,13 +70,36 @@ void addRespringButtonCallBack()
 
 - (void)addRespringButton:(NSNotification *)notification 
 {
-    UIAlertView *alert =
-    [[UIAlertView alloc] initWithTitle:@"提醒"
-                               message:@"要儲存設定，必須重新啟動主畫面，您要現在重新啟動主畫面嗎？"
-                              delegate:self
-                     cancelButtonTitle:@"稍後"
-                     otherButtonTitles:@"好", nil];
-    [alert show];
+    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_10_0) {
+        UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle:@"提醒"
+                                message:@"要儲存設定，必須重新啟動主畫面，您要現在重新啟動主畫面嗎？"
+                                delegate:self
+                        cancelButtonTitle:@"稍後"
+                        otherButtonTitles:@"好", nil];
+        [alert show];
+    }
+    else {
+        UIAlertController *alertController = 
+        [UIAlertController alertControllerWithTitle:@"提醒" 
+            message:@"要儲存設定，必須重新啟動主畫面，您要現在重新啟動主畫面嗎？"
+            preferredStyle:UIAlertControllerStyleAlert];
+
+        [alertController addAction:
+            [UIAlertAction actionWithTitle:@"稍後"
+                style:UIAlertActionStyleDefault 
+                handler:^(UIAlertAction *action) {}]];
+
+        [alertController addAction:
+            [UIAlertAction actionWithTitle:@"好" 
+                style:UIAlertActionStyleDefault 
+                handler:^(UIAlertAction *action) {
+            [self showLoadingView];
+            [self performSelector:@selector(respring) withObject:self afterDelay:2.0];
+        }]];
+
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex 

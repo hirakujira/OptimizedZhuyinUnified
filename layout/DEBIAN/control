@@ -3,7 +3,7 @@ Priority: optional
 Section: Tweaks
 Maintainer: Hiraku <dev@hiraku.tw>
 Architecture: iphoneos-arm
-Version: 3.0.1
+Version: 3.0.2
 Replaces: com.hiraku.optimizedzhuyin, com.hiraku.optimizedzhuyin6, com.hiraku.optimizedzhuyin7, com.hiraku.optimizedzhuyin8
 Provides: com.hiraku.optimizedzhuyin, com.hiraku.optimizedzhuyin6, com.hiraku.optimizedzhuyin7, com.hiraku.optimizedzhuyin8
 Conflicts: com.hiraku.optimizedzhuyin, com.hiraku.optimizedzhuyin6, com.hiraku.optimizedzhuyin7, com.hiraku.optimizedzhuyin8

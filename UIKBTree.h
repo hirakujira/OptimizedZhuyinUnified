@@ -2,6 +2,8 @@
  Image: /System/Library/Frameworks/UIKit.framework/UIKit
  */
 
+#import <UIKit/UIKit.h>
+
 @interface UIKBTree : NSObject <NSCopying> {
     NSMutableDictionary * cache;
     NSString * layoutTag;

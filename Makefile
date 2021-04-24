@@ -7,7 +7,6 @@ SYSROOT = $(THEOS)/sdks/iPhoneOS9.2.sdk
 TARGET = iphone:latest:6.0
 ARCHS = armv7 arm64 arm64e
 
-OptimizedZhuyinUnified_LDFLAGS += -Wl,-segalign,4000
 GO_EASY_ON_ME = 1
 FINALPACKAGE = 1
 
