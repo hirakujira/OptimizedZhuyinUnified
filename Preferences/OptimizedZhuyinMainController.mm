@@ -2,6 +2,14 @@
 
 static int respring;
 
+static void easy_spawn(const char* args[]) 
+{
+    pid_t pid;
+    int status;
+    posix_spawn(&pid, args[0], NULL, NULL, (char* const*)args, NULL);
+    waitpid(pid, &status, WEXITED);
+}
+
 void addRespringButtonCallBack() 
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AddRespringButton" object:nil];
@@ -51,14 +59,14 @@ void addRespringButtonCallBack()
 
 - (id)readPreferenceValue:(PSSpecifier *)specifier 
 {
-	NSString *path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
+	NSString *path = [NSString stringWithFormat:ROOT_PATH_NS(@"/var/mobile/Library/Preferences/%@.plist"), specifier.properties[@"defaults"]];
 	NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:path];
 	return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
 }
 
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier 
 {
-	NSString *path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
+	NSString *path = [NSString stringWithFormat:ROOT_PATH_NS(@"/var/mobile/Library/Preferences/%@.plist"), specifier.properties[@"defaults"]];
 	NSMutableDictionary *settings = [NSMutableDictionary dictionaryWithContentsOfFile:path];
 	[settings setObject:value forKey:specifier.properties[@"key"]];
 	[settings writeToFile:path atomically:YES];
@@ -115,7 +123,13 @@ void addRespringButtonCallBack()
 
 - (void)respring 
 {
-	system("rm -Rf /User/Library/Caches/com.apple.keyboards/");
+	system("rm -Rf /var/mobile/Library/Caches/com.apple.keyboards/");
+
+    if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_8_0 && [NSFileManager.defaultManager fileExistsAtPath:ROOT_PATH_NS(@"/usr/bin/killall")]) {
+        easy_spawn((const char *[]){ROOT_PATH("/usr/bin/killall"), "lsd", "SpringBoard", NULL});
+        easy_spawn((const char *[]){ROOT_PATH("/usr/bin/killall"), "backboardd", NULL});
+        return;
+    }
     system("/usr/bin/killall lsd SpringBoard");
     system("/usr/bin/killall backboardd");
 }

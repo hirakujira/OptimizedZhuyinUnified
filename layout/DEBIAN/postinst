@@ -4,20 +4,29 @@ if [[ $1 == install || update ]]; then
     echo "Cleaning keyboard cache..."
     rm -rf /var/mobile/Library/Caches/com.apple.keyboards/
 
-    version=$(sw_vers | grep -c 'ProductVersion: 5')
-
-    if [[ $version == 0 ]]; then
+    if [ -f "/var/jb/usr/bin/sw_vers" ]; then
+        # Rootless
         echo "Removing legacy tweak..."
-        rm -rf /Library/PreferenceBundles/OptimizedZhuyin5.bundle
-        rm -f /Library/PreferenceLoader/Preferences/OptimizedZhuyin5.plist
-        rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin5.dylib
-        rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin5.plist
+        rm -rf /var/jb/Library/PreferenceBundles/OptimizedZhuyin5.bundle
+        rm -f /var/jb/Library/PreferenceLoader/Preferences/OptimizedZhuyin5.plist
+        rm -f /var/jb/Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin5.dylib
+        rm -f /var/jb/Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin5.plist
     else
-        echo "Removing modern tweak..."
-        rm -rf /Library/PreferenceBundles/OptimizedZhuyinUnified.bundle
-        rm -f /Library/PreferenceLoader/Preferences/OptimizedZhuyinUnified.plist
-        rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyinUnified.dylib
-        rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyinUnified.plist
+        version=$(sw_vers | grep -c 'ProductVersion: 5')
+
+        if [[ $version == 0 ]]; then
+            echo "Removing legacy tweak..."
+            rm -rf /Library/PreferenceBundles/OptimizedZhuyin5.bundle
+            rm -f /Library/PreferenceLoader/Preferences/OptimizedZhuyin5.plist
+            rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin5.dylib
+            rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyin5.plist
+        else
+            echo "Removing modern tweak..."
+            rm -rf /Library/PreferenceBundles/OptimizedZhuyinUnified.bundle
+            rm -f /Library/PreferenceLoader/Preferences/OptimizedZhuyinUnified.plist
+            rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyinUnified.dylib
+            rm -f /Library/MobileSubstrate/DynamicLibraries/OptimizedZhuyinUnified.plist
+        fi
     fi
 
     declare -a cydia

@@ -1,4 +1,8 @@
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreFoundation/CoreFoundation.h>
+#import <objc/runtime.h>
+#import <rootless.h>
 #import "UIKBTree.h"
 
 typedef enum 

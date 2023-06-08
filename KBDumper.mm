@@ -21,7 +21,7 @@
         #ifdef __x86_64__
         self.filePath = @"/Users/Hiraku/Desktop/tw.hiraku.optimizedzhuyin.keyboardinfo.plist";
         #else
-        self.filePath = @"/var/mobile/Library/Preferences/tw.hiraku.optimizedzhuyin.keyboardinfo.plist";
+        self.filePath = ROOT_PATH_NS(@"/var/mobile/Library/Preferences/tw.hiraku.optimizedzhuyin.keyboardinfo.plist");
         #endif
         self.config = [self loadConfigFromPath:self.filePath];
     }

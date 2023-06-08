@@ -1,6 +1,12 @@
+ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
+	ARCHS = arm64 arm64e
+	TARGET = iphone:16.2:15.0
+else
+	ARCHS = armv7 arm64 arm64e
+	TARGET = iphone:12.1.2:6.0
+endif
+
 GO_EASY_ON_ME = 1
-ARCHS = armv7 arm64 arm64e
-TARGET = :clang::6.0
 BUNDLE_NAME = OptimizedZhuyinUnified
 IP_ADDRESS=127.0.0.1
 RSYNC_SETTINGS = -e "ssh -p 2222" -z

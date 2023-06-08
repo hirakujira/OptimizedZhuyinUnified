@@ -4,8 +4,14 @@ OptimizedZhuyinUnified_CFLAGS = -F$(SYSROOT)/System/Library/CoreServices -fobjc-
 OptimizedZhuyinUnified_PRIVATE_FRAMEWORKS = UIKit Foundation
 
 SYSROOT = $(THEOS)/sdks/iPhoneOS9.2.sdk
-TARGET = iphone:latest:6.0
-ARCHS = armv7 arm64 arm64e
+
+ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
+	ARCHS = arm64 arm64e
+	TARGET = iphone:16.2:12.1.3
+else
+	ARCHS = armv7 arm64 arm64e
+	TARGET = iphone:12.1.2:6.0
+endif
 
 GO_EASY_ON_ME = 1
 FINALPACKAGE = 1

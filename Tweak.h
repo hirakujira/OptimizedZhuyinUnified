@@ -5,11 +5,11 @@
 #import <SpringBoard/SBApplication.h>
 #import <SpringBoard/SBApplicationController.h>
 #import <SpringBoard/SpringBoard.h>
-#import "Tweak.h"
+#import <rootless.h>
 #import "KBDumper.h"
 
 #define iOS11 kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_11_0
-#define SETTINGS_PATH @"/var/mobile/Library/Preferences/tw.hiraku.optimizedzhuyin.plist"
+#define SETTINGS_PATH ROOT_PATH_NS(@"/var/mobile/Library/Preferences/tw.hiraku.optimizedzhuyin.plist")
 
 @interface CPBitmapStore : NSObject
 - (id)allGroups;
@@ -40,4 +40,3 @@ static KBDumper *dumper;
 static BOOL showVerifyError = NO;
 
 NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:SETTINGS_PATH];
-static double ss;
