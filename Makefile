@@ -7,7 +7,7 @@ SYSROOT = $(THEOS)/sdks/iPhoneOS9.2.sdk
 
 ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
 	ARCHS = arm64 arm64e
-	TARGET = iphone:16.2:12.1.3
+	TARGET = iphone:16.2:12.0
 else
 	ARCHS = armv7 arm64 arm64e
 	TARGET = iphone:12.1.2:6.0
